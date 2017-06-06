@@ -1,6 +1,6 @@
-package syma.action;
+package action;
 
-import syma.agent.Human;
+import agent.HumanAgent;
 
 public abstract class Action {
 	private int duration;
@@ -8,7 +8,7 @@ public abstract class Action {
 	private int energy;
 	private int hungry;
 	
-	public void impact(Human human) {
+	public void impact(HumanAgent human) {
 		human.setMood(this.mood);
 		human.setEnergy(this.energy);
 		human.setHungry(this.hungry);

@@ -1,4 +1,4 @@
-package syma.agent;
+package agent;
 
 import repast.simphony.engine.schedule.ScheduledMethod;
 import repast.simphony.random.RandomHelper;

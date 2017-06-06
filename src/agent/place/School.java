@@ -1,4 +1,4 @@
-package syma.place;
+package agent.place;
 
 
 public class School extends Place {

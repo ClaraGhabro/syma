@@ -1,9 +1,9 @@
-package syma.agent;
+package agent;
 
+import action.Action;
 import repast.simphony.space.grid.Grid;
-import syma.action.Action;
 
-public class Human extends Agent{
+public class HumanAgent extends Agent{
 	private int gender; // 0 : male, 1 : female
 	private int max_age;
 	private int age;
@@ -13,7 +13,7 @@ public class Human extends Agent{
 	private int mood;
 	private Action current_action;
 	
-	public Human(int i, int j, Grid<Agent> grid2, int gender) {
+	public HumanAgent(int i, int j, Grid<Agent> grid2, int gender) {
 		super(i, j, grid2);
 		this.gender = gender;
 	}

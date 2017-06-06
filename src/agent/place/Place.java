@@ -1,6 +1,6 @@
-package syma.place;
+package agent.place;
 
-import syma.agent.Human;
+import agent.HumanAgent;
 
 public abstract class Place {
 	private int mood;
@@ -12,7 +12,7 @@ public abstract class Place {
 		this.energy = energy;
 		this.hungry = hungry;
 	}
-	void affect(Human human) {
+	void affect(HumanAgent human) {
 		human.setMood(this.mood);
 		human.setEnergy(this.energy);
 		human.setHungry(this.hungry);

@@ -1,16 +1,16 @@
 package action;
 
-import agent.HumanAgent;
+import agent.Human;
 
 public abstract class Action {
 	private int duration;
 	private int mood;
 	private int energy;
-	private int hungry;
+	private int hunger;
 	
-	public void impact(HumanAgent human) {
-		human.setMood(this.mood);
-		human.setEnergy(this.energy);
-		human.setHungry(this.hungry);
+	public void impact(Human human) {
+		human.addMood(this.mood);
+		human.addEnergy(this.energy);
+		human.addHunger(this.hunger);
 	}
 }

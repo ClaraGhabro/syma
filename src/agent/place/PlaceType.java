@@ -5,8 +5,8 @@ public enum PlaceType {
 	CONCRETE,
 	SCHOOL,
 	FIELD,
-	HOME,
-	PARC,
+	HOUSE,
+	PARK,
 	ROAD,
 	WATER,
 	FOREST

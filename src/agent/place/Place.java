@@ -1,20 +1,31 @@
 package agent.place;
 
-import agent.HumanAgent;
+import agent.Human;
 
 public abstract class Place {
+	private PlaceType type;
 	private int mood;
 	private int energy;
-	private int hungry;
+	private int hunger;
 
-	public Place(int mood, int energy, int hungry) {
+	public Place(PlaceType type, int mood, int energy, int hunger) {
+		this.type = type;
 		this.mood = mood;
 		this.energy = energy;
-		this.hungry = hungry;
+		this.hunger = hunger;
 	}
-	void affect(HumanAgent human) {
-		human.setMood(this.mood);
-		human.setEnergy(this.energy);
-		human.setHungry(this.hungry);
+	
+	public void affect(Human human) {
+		human.addMood(this.mood);
+		human.addEnergy(this.energy);
+		human.addHunger(this.hunger);
+	}
+	
+	public PlaceType getType() {
+		return this.type;
+	}
+	
+	public boolean isAccessibleTo(Human human) {
+		return this.type != PlaceType.WATER;
 	}
 }

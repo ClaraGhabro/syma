@@ -1,9 +1,24 @@
 package agent.place;
 
-public class House extends Place {
+import agent.Human;
 
-	public House(int mood, int energy, int hungry) {
-		super(mood, energy, hungry);
+public class House extends Place {
+	private int money;
+	
+	public House(int mood, int energy, int hunger) {
+		super(PlaceType.HOUSE, mood, energy, hunger);
 	}
 
+	public int getMoney() {
+		return this.money;
+	}
+	
+	public void addMoney(int money) {
+		this.money += money;
+	}
+	
+	@Override
+	public boolean isAccessibleTo(Human human) {
+		return human.getHouse() == this;
+	}
 }

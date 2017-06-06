@@ -1,32 +1,43 @@
 package agent.place;
 
+import agent.Agent;
 import agent.Human;
+import job.Farmer;
+import repast.simphony.space.grid.Grid;
 
 public class Field extends Place {
 	private static int maxAge;
 	private static int minAge;
 	private int age;
-	
-	public Field(int mood, int energy, int hunger) {
-		super(PlaceType.FIELD, mood, energy, hunger);
+
+	public Field(int i, int j, Grid<Agent> grid, int mood, int energy, int hunger) {
+		super(i, j, grid, PlaceType.FIELD, mood, energy, hunger);
 		this.age = 0;
 	}
 
 	public void setMaxAge(int age) {
-		this.maxAge = age;
+		Field.maxAge = age;
 	}
-	
+
 	public void setMinAge(int age) {
-		this.minAge = age;
+		Field.minAge = age;
 	}
-	
+
 	@Override
 	public PlaceType getType() {
 		return age > minAge ? PlaceType.FIELD: PlaceType.LAND;
 	}
-	
+
 	@Override
 	public boolean isAccessibleTo(Human human) {
-		return human.getWork() instanceof Farmer;
+		return human.getJob() instanceof Farmer;
 	}
+
+	@Override
+	public void update() {
+		this.age = (age + 1) % maxAge;
+	}
+
+	@Override
+	public void step() {}
 }

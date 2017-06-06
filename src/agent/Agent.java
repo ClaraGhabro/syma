@@ -12,23 +12,27 @@ import repast.simphony.context.Context;
 
 public abstract class Agent {
 	protected Grid<Agent> grid;
-	protected boolean alive;
 	protected int x;
 	protected int y;
 	
-	public Agent(int i, int j, Grid<Agent> grid2) {
-		this.grid = grid2;
+	public Agent(int i, int j, Grid<Agent> grid) {
+		this.grid = grid;
 		this.x = i;
 		this.y = j;
 	}
-	@ScheduledMethod(start = 1, interval = 1)
+
+	@ScheduledMethod(start = 1, interval = 1, priority=1)
+	public abstract void update();
+
+	@ScheduledMethod(start = 1, interval = 1, priority=2)
 	public abstract void step();
-		
+
 	protected void die() {
 		Context<Agent> context = ContextUtils.getContext(this);
 		context.remove(this);
 	}
-	
+
+	/*
 	protected void move() {
 		Uniform u = RandomHelper.createUniform();
 		double xx = u.nextDouble();
@@ -40,5 +44,6 @@ public abstract class Agent {
 		 
 		 grid.moveTo(this, x, y);
 		}
-	
+	}
+	*/
 }

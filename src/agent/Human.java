@@ -108,7 +108,7 @@ public class Human extends Agent{
 	}
 	
 	public Action goGetMoney() {
-		return job.getNextStep();
+		return job.getNextStep(this);
 	}
 	
 	public Action goGetAdulthood() {

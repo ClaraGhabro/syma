@@ -9,7 +9,7 @@ public class Farmer extends Job {
 	}
 
 	@Override
-	public Action getNextStep() {
+	public Action getNextStep(Human human) {
 		// TODO: Si au field, HARVEST, sinon aller au plus proche FIELD � pied ou en driver si plus int�ressant
 		return null;
 	}

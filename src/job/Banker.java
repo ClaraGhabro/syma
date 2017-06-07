@@ -10,7 +10,7 @@ public class Banker extends Job {
 	}
 
 	@Override
-	public Action getNextStep() {
+	public Action getNextStep(Human human) {
 		return new TradeAction(human);
 	}
 }

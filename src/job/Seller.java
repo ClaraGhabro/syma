@@ -9,7 +9,7 @@ public class Seller extends Job {
 	}
 
 	@Override
-	public Action getNextStep() {
+	public Action getNextStep(Human human) {
 		// TODO: Va � un hungry human, sinon random
 		return null;
 	}

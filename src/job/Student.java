@@ -9,7 +9,7 @@ public class Student extends Job {
 	}
 
 	@Override
-	public Action getNextStep() {
+	public Action getNextStep(Human human) {
 		// TODO: Si assez vieux, goGetHouse, sinon si � l'�cole LearnAction, sinon goToSchool, sinon House
 		return null;
 	}

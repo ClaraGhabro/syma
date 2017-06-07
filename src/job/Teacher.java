@@ -9,7 +9,7 @@ public class Teacher extends Job {
 	}
 
 	@Override
-	public Action getNextStep() {
+	public Action getNextStep(Human human) {
 		// TODO: GoToPlace �cole la plus proche, sinon WAIT
 		return null;
 	}

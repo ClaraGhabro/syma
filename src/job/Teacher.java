@@ -4,15 +4,13 @@ import action.Action;
 import agent.Human;
 
 public class Teacher extends Job {
-
-	public Teacher(Human human) {
-		super(human);
+	public Teacher() {
 		this.jobType = JobType.TEACHER;
 	}
 
 	@Override
 	public Action getNextStep() {
-		// TODO: GoToPlace école la plus proche, sinon WAIT
+		// TODO: GoToPlace ï¿½cole la plus proche, sinon WAIT
 		return null;
 	}
 }

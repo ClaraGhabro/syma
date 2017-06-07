@@ -30,12 +30,13 @@ F R R f f f f f f f f f f f f f f f f f f f f R R f f f f f f f f f f f f f f f 
 F R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R F
 F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F
 
-homme 10
-femme 10
+male 10
+female 10
 
-BANKER 0.1
-DRIVER 0.1
-FARMER 0.3
-SELLER 0.2
-STUDENT 0.2
-TEACHER 0.1
+BANKER 0.1  0.1
+DRIVER 0.1  0.2
+FARMER 0.3  0.5
+SELLER 0.2  0.7
+STUDENT 0.2 0.9
+TEACHER 0.1 1
+0.6

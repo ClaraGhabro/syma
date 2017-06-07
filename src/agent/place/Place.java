@@ -31,4 +31,16 @@ public class Place extends Agent {
 	public boolean isAccessibleTo(Human human) {
 		return this.type != PlaceType.WATER;
 	}
+
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void step() {
+		// TODO Auto-generated method stub
+		
+	}
 }

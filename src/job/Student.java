@@ -4,14 +4,13 @@ import action.Action;
 import agent.Human;
 
 public class Student extends Job {
-	public Student(Human human) {
-		super(human);
+	public Student() {
 		this.jobType = JobType.STUDENT;
 	}
 
 	@Override
 	public Action getNextStep() {
-		// TODO: Si assez vieux, goGetHouse, sinon si à l'école LearnAction, sinon goToSchool, sinon House
+		// TODO: Si assez vieux, goGetHouse, sinon si ï¿½ l'ï¿½cole LearnAction, sinon goToSchool, sinon House
 		return null;
 	}
 

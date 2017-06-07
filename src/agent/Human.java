@@ -28,6 +28,12 @@ public class Human extends Agent{
 	public Human(int i, int j, Grid<Agent> grid) {
 		super(i, j, grid);
 	}
+	
+	public Human(int i, int j, Grid<Agent> grid, int gender, int age, Job job) {
+		super(i, j, grid);
+		this.gender = gender;
+		this.age = age;
+	}
 
 	public void addMood(int mood) {
 		this.mood += mood;
@@ -62,7 +68,7 @@ public class Human extends Agent{
 
 	@Override
 	public void update() {
-		// TODO: Interagir avec le terrain pour mettre à jour mood, energy, hunger, education
+		// TODO: Interagir avec le terrain pour mettre ï¿½ jour mood, energy, hunger, education
 		
 		age++;		
 		currentAction.update();
@@ -79,7 +85,7 @@ public class Human extends Agent{
 		}
 		
 		if (currentAction == null) {
-			// TODO: Reproduire (Si partenaire à la maison, maisons disponibles pour le sexe, assez vieux), ou combler le besoin au minimum (mood, energy, food, money)
+			// TODO: Reproduire (Si partenaire ï¿½ la maison, maisons disponibles pour le sexe, assez vieux), ou combler le besoin au minimum (mood, energy, food, money)
 			currentAction.initiate();
 		}
 		currentAction.step();
@@ -91,12 +97,12 @@ public class Human extends Agent{
 	}
 	
 	public Action goGetSleep() {
-		// TODO: si à la maison, SleepAction, sinon GoToPlaceAction => House
+		// TODO: si ï¿½ la maison, SleepAction, sinon GoToPlaceAction => House
 		return null;
 	}
 	
 	public Action goGetFood() {
-		// TODO: si auprès d'un Seller => BuyFood, sinon GoToHumanAction => Seller
+		// TODO: si auprï¿½s d'un Seller => BuyFood, sinon GoToHumanAction => Seller
 		return null;
 	}
 	

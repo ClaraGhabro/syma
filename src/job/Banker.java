@@ -9,8 +9,9 @@ public class Banker extends Job {
 		this.jobType = JobType.BANKER;
 	}
 
-	@Override
-	public Action getNextStep(Human human) {
-		return new TradeAction(human);
+//	public Action getNextStep(Human human) {
+//		return new TradeAction(human);
+	public Action getNextStep() {
+		return null;//new TradeAction(human);
 	}
 }

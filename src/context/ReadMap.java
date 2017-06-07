@@ -28,7 +28,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class ReadMap {
 	private String path;
@@ -45,8 +44,8 @@ public class ReadMap {
 	private int nbFemale = 0;
 	private int nbHouse = 0;
 	
-	private ArrayList<Human> people;
-	private ArrayList<Place> place;
+	private ArrayList<Human> people = new ArrayList<Human>();
+	private ArrayList<Place> place = new ArrayList<Place>();
 	
 	public ReadMap() {
 		this.path = "tests/carte.txt";
@@ -56,15 +55,12 @@ public class ReadMap {
 	public Grid<Agent> createGrid(Context<Agent> context) {
         BufferedReader br = null;
         FileReader fr = null;
+        Grid<Agent> grid = null;
         
-        GridFactory gfac = GridFactoryFinder.createGridFactory(null);
-		GridBuilderParameters<Agent> gbp = new GridBuilderParameters<Agent>(new WrapAroundBorders(), 
-				new SimpleGridAdder<Agent>(), true, this.width, this.height);
-        Grid<Agent> grid = gfac.createGrid("grid", context, gbp);
-
         try {
             fr = new FileReader(this.path);
             br = new BufferedReader(fr);
+
 
             String sCurrentLine;
 
@@ -73,12 +69,22 @@ public class ReadMap {
             sCurrentLine = br.readLine();
             this.width = Integer.parseInt(sCurrentLine.split(" ")[0]);
             this.height = Integer.parseInt(sCurrentLine.split(" ")[1]);
-
+            System.out.println("height : " + height);
+            System.out.println("width: " + width);
             int i = 0;
             int j = 0;
 
+            
+            GridFactory gfac = GridFactoryFinder.createGridFactory(null);
+    		GridBuilderParameters<Agent> gbp = new GridBuilderParameters<Agent>(new WrapAroundBorders(), 
+    				new SimpleGridAdder<Agent>(), true, this.width, this.height);
+            grid = gfac.createGrid("MyNeighboursLife", context, gbp);
+
+            
             while ((sCurrentLine = br.readLine()) != null && i != width) {
                 for (String mapElt : sCurrentLine.split(" ")) {
+             //       System.out.println("mapElt: " + mapElt);
+                	
                     switch (mapElt) {
                         case "F": { // Forest
                         	Place forest = new Place(i, j, grid, PlaceType.FOREST, 0, 0, 0);
@@ -172,21 +178,27 @@ public class ReadMap {
             }
           
             for (int k = 0; k < this.nbFemale; ++k) {
-            	int randomNum = ThreadLocalRandom.current().nextInt(0, this.nbHouse + 1);
-            	House currHouse = findHouse(randomNum);
-            	Human human = new Human(currHouse.getX(), currHouse.getY(), grid, 1, 20, selectJob());
-            	people.add(human);
-            	currHouse.add(human);
-            	
-            	context.add(human);
-            	grid.moveTo(human, currHouse.getX(), currHouse.getY());
+            	for (int n = 0; n < this.nbHouse; ++n) {
+            		House currHouse = findHouse(n);
+            		if (currHouse == null)
+            			System.out.println("c'est la meeeeerde");
+            		ArrayList<Human> tmplist = currHouse.getInhabitants(); 
+            		if (tmplist.isEmpty()){
+            			Human human = new Human(currHouse.getX(), currHouse.getY(), grid, 1, 20, selectJob());
+            			people.add(human);
+            			currHouse.add(human);
+            			context.add(human);
+            			grid.moveTo(human, currHouse.getX(), currHouse.getY());
+            		}
+            	}
             }
 
             for (int k = 0; k < this.nbMale; ++k) {
             	
             	for (int n = 0; n < this.nbHouse; ++n) {
          			House currHouse = findHouse(n);
-            		if (currHouse.getInhabitants().size() == 1){
+         			ArrayList<Human> tmplist = currHouse.getInhabitants(); 
+            		if (tmplist.size() == 1){
             			Human human = new Human(currHouse.getX(), currHouse.getY(), grid, 0, 20, selectJob());
                     	currHouse.add(human);
                     	people.add(human);
@@ -233,10 +245,16 @@ public class ReadMap {
 	
 	public House findHouse(int position) {
 		for (int i = 0; i < this.place.size(); ++i) {
-			if (this.place.get(i) instanceof House)
+			if (this.place.get(i) instanceof House) {
+				
+				System.out.println("cest une house");
+				if (position == 0) {
+		//			System.out.println("c'est laaaaaa maisons");
+					return (House) this.place.get(i);
+				}
 				position--;
-			if (position == 0)
-				return (House) this.place.get(i);
+				
+			}
 
 		}
 		return null;
@@ -244,10 +262,11 @@ public class ReadMap {
 
 	public School findSchool(int position) {
 		for (int i = 0; i < this.place.size(); ++i) {
-			if (this.place.get(i) instanceof School)
+			if (this.place.get(i) instanceof School) {
+				if (position == 0)
+					return (School) this.place.get(i);
 				position--;
-			if (position == 0)
-				return (School) this.place.get(i);
+			}
 
 		}
 		return null;
@@ -255,10 +274,11 @@ public class ReadMap {
 
 	public Field findField(int position) {
 		for (int i = 0; i < this.place.size(); ++i) {
-			if (this.place.get(i) instanceof Field)
+			if (this.place.get(i) instanceof Field) {
+				if (position == 0)
+					return (Field) this.place.get(i);
 				position--;
-			if (position == 0)
-				return (Field) this.place.get(i);
+			}
 
 		}
 		return null;
@@ -266,10 +286,11 @@ public class ReadMap {
 	
 	public Road findRoad(int position) {
 		for (int i = 0; i < this.place.size(); ++i) {
-			if (this.place.get(i) instanceof Road)
+			if (this.place.get(i) instanceof Road) {
+				if (position == 0)
+					return (Road) this.place.get(i);
 				position--;
-			if (position == 0)
-				return (Road) this.place.get(i);
+			}
 
 		}
 		return null;
@@ -277,10 +298,11 @@ public class ReadMap {
 	
 	public Place findLand(int position) {
 		for (int i = 0; i < this.place.size(); ++i) {
-			if (this.place.get(i) instanceof Place && this.place.get(i).getType() == PlaceType.LAND)
+			if (this.place.get(i) instanceof Place && this.place.get(i).getType() == PlaceType.LAND) {
+				if (position == 0)
+					return (Place) this.place.get(i);
 				position--;
-			if (position == 0)
-				return (Place) this.place.get(i);
+			}
 
 		}
 		return null;
@@ -288,10 +310,11 @@ public class ReadMap {
 	
 	public Place findConcrete(int position) {
 		for (int i = 0; i < this.place.size(); ++i) {
-			if (this.place.get(i) instanceof Place && this.place.get(i).getType() == PlaceType.CONCRETE)
+			if (this.place.get(i) instanceof Place && this.place.get(i).getType() == PlaceType.CONCRETE) {
+				if (position == 0)
+					return (Place) this.place.get(i);
 				position--;
-			if (position == 0)
-				return (Place) this.place.get(i);
+			}
 
 		}
 		return null;
@@ -299,10 +322,11 @@ public class ReadMap {
 	
 	public Place findWater(int position) {
 		for (int i = 0; i < this.place.size(); ++i) {
-			if (this.place.get(i) instanceof Place && this.place.get(i).getType() == PlaceType.WATER)
+			if (this.place.get(i) instanceof Place && this.place.get(i).getType() == PlaceType.WATER) {
+				if (position == 0)
+					return (Place) this.place.get(i);
 				position--;
-			if (position == 0)
-				return (Place) this.place.get(i);
+			}
 
 		}
 		return null;
@@ -310,10 +334,11 @@ public class ReadMap {
 	
 	public Place findPark(int position) {
 		for (int i = 0; i < this.place.size(); ++i) {
-			if (this.place.get(i) instanceof Place && this.place.get(i).getType() == PlaceType.PARK)
+			if (this.place.get(i) instanceof Place && this.place.get(i).getType() == PlaceType.PARK) {
+				if (position == 0)
+					return (Place) this.place.get(i);
 				position--;
-			if (position == 0)
-				return (Place) this.place.get(i);
+			}
 
 		}
 		return null;
@@ -322,10 +347,11 @@ public class ReadMap {
 	
 	public Place findForest(int position) {
 		for (int i = 0; i < this.place.size(); ++i) {
-			if (this.place.get(i) instanceof Place && this.place.get(i).getType() == PlaceType.FOREST)
+			if (this.place.get(i) instanceof Place && this.place.get(i).getType() == PlaceType.FOREST) {
+				if (position == 0)
+					return (Place) this.place.get(i);
 				position--;
-			if (position == 0)
-				return (Place) this.place.get(i);
+			}
 
 		}
 		return null;

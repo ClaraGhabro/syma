@@ -5,7 +5,7 @@ import action.TradeAction;
 import agent.Human;
 
 public class Banker extends Job {
-	public Banker() {}
+	public Banker() {
 		this.jobType = JobType.BANKER;
 	}
 

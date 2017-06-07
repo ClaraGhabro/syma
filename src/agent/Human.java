@@ -33,6 +33,7 @@ public class Human extends Agent{
 		super(i, j, grid);
 		this.gender = gender;
 		this.age = age;
+		this.job = job;
 	}
 
 	public void addMood(int mood) {

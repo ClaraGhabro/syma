@@ -37,6 +37,21 @@ public class Human extends Agent{
 	public void addHunger(int hunger) {
 		this.hunger += hunger;
 	}
+	public void addEducation(int education) {
+		this.education += education;
+	}
+	public int getMood() {
+		return mood;
+	}
+	public int getEnergy() {
+		return energy;
+	}
+	public int getHunger() {
+		return hunger;
+	}
+	public int getEducation() {
+		return education;
+	}
 	public Job getJob() {
 		return this.job;
 	}

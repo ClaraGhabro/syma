@@ -23,6 +23,14 @@ public class Field extends Place {
 		Field.minAge = age;
 	}
 
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	public int getAge() {
+		return age;
+	}
+	
 	@Override
 	public PlaceType getType() {
 		return age > minAge ? PlaceType.FIELD: PlaceType.LAND;

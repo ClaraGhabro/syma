@@ -3,10 +3,12 @@ package action;
 import agent.Human;
 
 public abstract class Action {
-	private int duration;
-	private int mood;
-	private int energy;
-	private int hunger;
+	protected Human human;
+	protected int duration;
 	
-	public abstract void initiate(Human human);
+	public Action(Human human) {
+		this.human = human;
+	}
+	public abstract void initiate();
+	public abstract void step();
 }

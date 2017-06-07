@@ -20,7 +20,15 @@ public abstract class Agent {
 		this.x = i;
 		this.y = j;
 	}
+	
+	public int getX() {
+		return x;
+	}
 
+	public int getY() {
+		return y;
+	}
+	
 	@ScheduledMethod(start = 1, interval = 1, priority=1)
 	public abstract void update();
 

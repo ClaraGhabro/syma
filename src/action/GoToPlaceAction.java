@@ -21,7 +21,6 @@ public class GoToPlaceAction extends Action {
 
 	@Override
 	public void step() {
-		// TODO Auto-generated method stub
-		
+		// TODO: Avancer jusqu'au lieu en question
 	}
 }

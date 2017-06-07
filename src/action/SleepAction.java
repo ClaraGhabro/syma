@@ -15,6 +15,5 @@ public class SleepAction extends Action {
 	@Override
 	public void step() {
 		this.human.addEnergy(10);
-		this.duration--;
 	}
 }

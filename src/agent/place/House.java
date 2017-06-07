@@ -34,6 +34,10 @@ public class House extends Place {
 	@Override
 	public void step() {}
 
+	public void add(Human human) {
+		inhabitants.add(human);
+	}
+	
 	public int remove(Human human) {
 		int nbInhab = inhabitants.size();
 		

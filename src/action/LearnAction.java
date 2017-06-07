@@ -16,7 +16,5 @@ public class LearnAction extends Action {
 	@Override
 	public void step() {
 		// TODO: échanger de l'argent contre de l'éducation auprès du professeur
-		
 	}
-
 }

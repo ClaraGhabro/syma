@@ -38,6 +38,10 @@ public class House extends Place {
 		inhabitants.add(human);
 	}
 	
+	public ArrayList<Human> getInhabitants() {
+		return this.inhabitants;
+	}
+	
 	public int remove(Human human) {
 		int nbInhab = inhabitants.size();
 		

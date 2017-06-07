@@ -6,6 +6,7 @@ import agent.place.Field;
 import agent.place.House;
 import agent.place.Place;
 import agent.place.PlaceType;
+import agent.place.Road;
 import agent.place.School;
 import cern.jet.random.Uniform;
 import job.Banker;
@@ -27,6 +28,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class ReadMap {
 	private String path;
@@ -108,7 +110,7 @@ public class ReadMap {
                         	break;
                         }
                         case "R": { // Road
-                        	Place road = new Place(i, j, grid, PlaceType.ROAD, 0, 0, 0);
+                        	Place road = new Road(i, j, grid, 0, 0, 0);
                         	place.add(road);
                         	context.add(road);
                         	grid.moveTo(road,  i, j);
@@ -149,7 +151,8 @@ public class ReadMap {
 //            System.out.println("nb de House : " + nbHouse);
 
 
-            while ((sCurrentLine = br.readLine()) != null) {
+            for (int r = 0; r < 2; ++r) {
+            	sCurrentLine = br.readLine(); 
             	String[] gender = sCurrentLine.split(" ");
             	switch (gender[0]) {
             		case "male"   : { this.nbMale = Integer.valueOf(gender[1]); break; }
@@ -169,17 +172,28 @@ public class ReadMap {
             }
           
             for (int k = 0; k < this.nbFemale; ++k) {
-            	Human human = new Human(i, j, grid, 1, 20, selectJob());
+            	int randomNum = ThreadLocalRandom.current().nextInt(0, this.nbHouse + 1);
+            	House currHouse = findHouse(randomNum);
+            	Human human = new Human(currHouse.getX(), currHouse.getY(), grid, 1, 20, selectJob());
             	people.add(human);
+            	currHouse.add(human);
+            	
             	context.add(human);
-            	grid.moveTo(human, i, j);
+            	grid.moveTo(human, currHouse.getX(), currHouse.getY());
             }
 
             for (int k = 0; k < this.nbMale; ++k) {
-            	Human human = new Human(i, j, grid, 0, 20, selectJob());
-            	people.add(human);
-            	context.add(human);
-            	grid.moveTo(human,  i, j);
+            	
+            	for (int n = 0; n < this.nbHouse; ++n) {
+         			House currHouse = findHouse(n);
+            		if (currHouse.getInhabitants().size() == 1){
+            			Human human = new Human(currHouse.getX(), currHouse.getY(), grid, 0, 20, selectJob());
+                    	currHouse.add(human);
+                    	people.add(human);
+                    	context.add(human);
+                    	grid.moveTo(human, currHouse.getX(), currHouse.getY());        		}
+            	}
+    
             }
 
             
@@ -196,9 +210,9 @@ public class ReadMap {
                 ex.printStackTrace();
             }
         }
-		return null;
-
+		return grid;
     }
+	
 	
 	public Job selectJob() {
 		float sum = this.bankerProb;
@@ -216,6 +230,107 @@ public class ReadMap {
 		else
 			return new Teacher();
 	}
+	
+	public House findHouse(int position) {
+		for (int i = 0; i < this.place.size(); ++i) {
+			if (this.place.get(i) instanceof House)
+				position--;
+			if (position == 0)
+				return (House) this.place.get(i);
+
+		}
+		return null;
+	}
+
+	public School findSchool(int position) {
+		for (int i = 0; i < this.place.size(); ++i) {
+			if (this.place.get(i) instanceof School)
+				position--;
+			if (position == 0)
+				return (School) this.place.get(i);
+
+		}
+		return null;
+	}
+
+	public Field findField(int position) {
+		for (int i = 0; i < this.place.size(); ++i) {
+			if (this.place.get(i) instanceof Field)
+				position--;
+			if (position == 0)
+				return (Field) this.place.get(i);
+
+		}
+		return null;
+	}
+	
+	public Road findRoad(int position) {
+		for (int i = 0; i < this.place.size(); ++i) {
+			if (this.place.get(i) instanceof Road)
+				position--;
+			if (position == 0)
+				return (Road) this.place.get(i);
+
+		}
+		return null;
+	}
+	
+	public Place findLand(int position) {
+		for (int i = 0; i < this.place.size(); ++i) {
+			if (this.place.get(i) instanceof Place && this.place.get(i).getType() == PlaceType.LAND)
+				position--;
+			if (position == 0)
+				return (Place) this.place.get(i);
+
+		}
+		return null;
+	}
+	
+	public Place findConcrete(int position) {
+		for (int i = 0; i < this.place.size(); ++i) {
+			if (this.place.get(i) instanceof Place && this.place.get(i).getType() == PlaceType.CONCRETE)
+				position--;
+			if (position == 0)
+				return (Place) this.place.get(i);
+
+		}
+		return null;
+	}
+	
+	public Place findWater(int position) {
+		for (int i = 0; i < this.place.size(); ++i) {
+			if (this.place.get(i) instanceof Place && this.place.get(i).getType() == PlaceType.WATER)
+				position--;
+			if (position == 0)
+				return (Place) this.place.get(i);
+
+		}
+		return null;
+	}
+	
+	public Place findPark(int position) {
+		for (int i = 0; i < this.place.size(); ++i) {
+			if (this.place.get(i) instanceof Place && this.place.get(i).getType() == PlaceType.PARK)
+				position--;
+			if (position == 0)
+				return (Place) this.place.get(i);
+
+		}
+		return null;
+	}
+	
+	
+	public Place findForest(int position) {
+		for (int i = 0; i < this.place.size(); ++i) {
+			if (this.place.get(i) instanceof Place && this.place.get(i).getType() == PlaceType.FOREST)
+				position--;
+			if (position == 0)
+				return (Place) this.place.get(i);
+
+		}
+		return null;
+	}
+	
 	
 	
 	public int getWidth() {

@@ -1,13 +1,13 @@
 package agent.place;
 
 public enum PlaceType {
-	LAND,
-	CONCRETE,
-	SCHOOL,
-	FIELD,
-	HOUSE,
-	PARK,
-	ROAD,
-	WATER,
-	FOREST
+	LAND,     // L
+	CONCRETE, // C
+	SCHOOL,   // S
+	FIELD,    // f
+	HOUSE,    // H
+	PARK,     // P
+	ROAD,     // R
+	WATER,    // W
+	FOREST    // F
 }

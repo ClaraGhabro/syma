@@ -13,5 +13,6 @@ public class WaitAction extends Action {
 
 	@Override
 	public void step() {
+		this.duration--;
 	}
 }

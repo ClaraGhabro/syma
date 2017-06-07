@@ -9,6 +9,14 @@ public abstract class Action {
 	public Action(Human human) {
 		this.human = human;
 	}
+	
+	public void update() {
+		this.duration--;
+	}
+	public int getDuration() {
+		return duration;
+	}
+	
 	public abstract void initiate();
 	public abstract void step();
 }

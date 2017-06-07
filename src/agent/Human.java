@@ -19,8 +19,9 @@ public class Human extends Agent{
 
 	private ArrayList<Human> parents;
 	private ArrayList<Human> siblings;
+	private ArrayList<Human> children;
 
-	private Action current_action;
+	private Action currentAction;
 	private Job job;
 	private House house;
 
@@ -62,11 +63,49 @@ public class Human extends Agent{
 	@Override
 	public void update() {
 		// TODO: Interagir avec le terrain pour mettre à jour mood, energy, hunger, education
-		// TODO: Mettre à jour l'action, l'âge
+		
+		age++;		
+		currentAction.update();
+		
+		if (currentAction.getDuration() == 0)
+			this.currentAction = null;
 	}
 
 	@Override
 	public void step() {
-		// TODO: Choisir ou continuer une action
+		if (mood <= 0 || energy <= 0 || hunger <= 0 || age > maxAge) {
+			die();
+			house.remove(this);
+		}
+		
+		if (currentAction == null) {
+			// TODO: Reproduire (Si partenaire à la maison, maisons disponibles pour le sexe, assez vieux), ou combler le besoin au minimum (mood, energy, food, money)
+			currentAction.initiate();
+		}
+		currentAction.step();
+	}
+	
+	public Action goGetMood() {
+		// TODO: si dans un parc, WaitAction, sinon GoToPlaceAction => Parc
+		return null;
+	}
+	
+	public Action goGetSleep() {
+		// TODO: si à la maison, SleepAction, sinon GoToPlaceAction => House
+		return null;
+	}
+	
+	public Action goGetFood() {
+		// TODO: si auprès d'un Seller => BuyFood, sinon GoToHumanAction => Seller
+		return null;
+	}
+	
+	public Action goGetMoney() {
+		return job.getNextStep();
+	}
+	
+	public Action goGetAdulthood() {
+		// TODO: remove de la House avec une part de l'argent, transfert dans une autre maison disponible, acquiert un nouveau job
+		return null;
 	}
 }

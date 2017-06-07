@@ -18,7 +18,9 @@ public class School extends Place {
 	}
 
 	@Override
-	public void update() {}
+	public void update() {
+		// TODO: open si contient un TEACHER, sinon not open
+	}
 
 	@Override
 	public void step() {}

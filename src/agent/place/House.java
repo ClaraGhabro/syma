@@ -1,14 +1,18 @@
 package agent.place;
 
+import java.util.ArrayList;
+
 import agent.Agent;
 import agent.Human;
 import repast.simphony.space.grid.Grid;
 
 public class House extends Place {
 	private int money;
+	private ArrayList<Human> inhabitants;
 
 	public House(int i, int j, Grid<Agent> grid, int mood, int energy, int hunger) {
 		super(i, j, grid, PlaceType.HOUSE, mood, energy, hunger);
+		this.inhabitants = new ArrayList<>();
 	}
 
 	public int getMoney() {
@@ -29,4 +33,18 @@ public class House extends Place {
 
 	@Override
 	public void step() {}
+
+	public int remove(Human human) {
+		int nbInhab = inhabitants.size();
+		
+		if (inhabitants.contains(human)) {
+			inhabitants.remove(human);
+			int result = money / nbInhab;
+			this.money = (nbInhab - 1) * money;
+			return result;
+		}
+		else {
+			return 0;
+		}
+	}
 }

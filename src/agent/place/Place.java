@@ -4,7 +4,7 @@ import agent.Agent;
 import agent.Human;
 import repast.simphony.space.grid.Grid;
 
-public abstract class Place extends Agent {
+public class Place extends Agent {
 	private PlaceType type;
 	private int mood;
 	private int energy;

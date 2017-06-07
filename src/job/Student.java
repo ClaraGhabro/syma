@@ -6,6 +6,7 @@ import agent.Human;
 public class Student extends Job {
 	public Student(Human human) {
 		super(human);
+		this.jobType = JobType.STUDENT;
 	}
 
 	@Override

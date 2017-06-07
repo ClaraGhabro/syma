@@ -6,6 +6,7 @@ import agent.Human;
 public class Driver extends Job {
 	public Driver(Human human) {
 		super(human);
+		this.jobType = JobType.DRIVER;
 	}
 
 	@Override

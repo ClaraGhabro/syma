@@ -7,6 +7,7 @@ public class Teacher extends Job {
 
 	public Teacher(Human human) {
 		super(human);
+		this.jobType = JobType.TEACHER;
 	}
 
 	@Override

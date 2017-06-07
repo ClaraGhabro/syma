@@ -6,6 +6,7 @@ import agent.Human;
 public class Farmer extends Job {
 	public Farmer(Human human) {
 		super(human);
+		this.jobType = JobType.FARMER;
 	}
 
 	@Override

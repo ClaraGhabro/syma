@@ -19,6 +19,7 @@ public class School extends Place {
 
 	@Override
 	public void update() {
+		
 		// TODO: open si contient un TEACHER, sinon not open
 	}
 

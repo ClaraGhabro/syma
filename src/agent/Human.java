@@ -111,6 +111,7 @@ public class Human extends Agent{
 	}
 	
 	public Action goGetAdulthood() {
+		int budget = house.remove(this);
 		// TODO: remove de la House avec une part de l'argent, transfert dans une autre maison disponible, acquiert un nouveau job
 		return null;
 	}

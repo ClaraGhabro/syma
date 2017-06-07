@@ -29,6 +29,10 @@ public abstract class Agent {
 		return y;
 	}
 	
+	public Grid<Agent> getGrid() {
+		return grid;
+	}
+	
 	@ScheduledMethod(start = 1, interval = 1, priority=1)
 	public abstract void update();
 

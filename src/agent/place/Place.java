@@ -24,6 +24,15 @@ public class Place extends Agent {
 		human.addHunger(this.hunger);
 	}
 
+	public int getMood() {
+		return mood;
+	}
+	public int getEnergy() {
+		return energy;
+	}
+	public int getHunger() {
+		return hunger;
+	}
 	public PlaceType getType() {
 		return this.type;
 	}
@@ -33,14 +42,8 @@ public class Place extends Agent {
 	}
 
 	@Override
-	public void update() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void update() {}
 
 	@Override
-	public void step() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void step() {}
 }

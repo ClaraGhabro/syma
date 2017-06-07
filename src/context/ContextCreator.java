@@ -57,4 +57,8 @@ public class ContextCreator implements ContextBuilder<Agent> {
 				return ((Place) obj);
 		return null;
 	}
+
+	public static Grid<Agent> getGrid() {
+		return grid;
+	}
 }

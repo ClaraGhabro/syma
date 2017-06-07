@@ -2,6 +2,7 @@ package context;
 
 import repast.simphony.context.Context;
 import repast.simphony.dataLoader.ContextBuilder;
+import repast.simphony.space.grid.Grid;
 import agent.Agent;
 
 /* TODO:
@@ -12,6 +13,10 @@ import agent.Agent;
 public class ContextCreator implements ContextBuilder<Agent> {
 	@Override
 	public Context<Agent> build(Context<Agent> context) {
+		context.setId("MyNeighboursLife");
+		ReadMap readMap = new ReadMap();
+		
+		Grid<Agent> grid = readMap.createGrid(context);
 		
 		return context;
 	}

@@ -23,7 +23,7 @@ public class ContextCreator implements ContextBuilder<Agent> {
 
 	@Override
 	public Context<Agent> build(Context<Agent> context) {
-		context.setId("MyNeighboursLife");
+		context.setId("syma");
 		ReadMap readMap = new ReadMap();
 		
 		this.grid = readMap.createGrid(context);

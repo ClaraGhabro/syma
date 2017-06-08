@@ -77,8 +77,8 @@ public class ReadMap {
             
             GridFactory gfac = GridFactoryFinder.createGridFactory(null);
     		GridBuilderParameters<Agent> gbp = new GridBuilderParameters<Agent>(new WrapAroundBorders(), 
-    				new SimpleGridAdder<Agent>(), true, this.width, this.height);
-            grid = gfac.createGrid("MyNeighboursLife", context, gbp);
+    				new SimpleGridAdder<Agent>(), false, this.width, this.height);
+            grid = gfac.createGrid("grid", context, gbp);
 
             
             while ((sCurrentLine = br.readLine()) != null && i != width) {

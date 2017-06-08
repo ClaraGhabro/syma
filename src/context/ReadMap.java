@@ -49,6 +49,7 @@ public class ReadMap {
 	
 	public ReadMap() {
 		this.path = "tests/carte.txt";
+		//this.path = "tests/carte_01.txt";
 
 	}
 	
@@ -81,7 +82,7 @@ public class ReadMap {
             grid = gfac.createGrid("grid", context, gbp);
 
             
-            while ((sCurrentLine = br.readLine()) != null && i != this.height) {
+            while ((sCurrentLine = br.readLine()) != null && i <= this.height) {
                 for (String mapElt : sCurrentLine.split(" ")) {
              //       System.out.println("mapElt: " + mapElt);
                 	

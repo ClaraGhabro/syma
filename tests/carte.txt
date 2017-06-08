@@ -1,6 +1,7 @@
 30 50
 
 F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F
+F F F F F F F F F F F W W W W R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R F
 F F F F F F F F F F F W W W L L L L f f f f f f f f f f f f f R R f f f f f f f f f f f f f F F F F
 F F F F F F F F W W W W W W W L L L f f f f f f f f f f f f f R R f f f f f f f f f f f f f F F F F
 F F F F F F F F F W W W W W L L L L f f f f f f f f f f f f f R R f f f f f f f f f f f f f F F F F

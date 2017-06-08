@@ -48,8 +48,8 @@ public class ReadMap {
 	private ArrayList<Place> place = new ArrayList<Place>();
 	
 	public ReadMap() {
-		this.path = "tests/carte.txt";
-		//this.path = "tests/carte_01.txt";
+		//this.path = "tests/carte.txt";
+		this.path = "tests/carte_01.txt";
 
 	}
 	
@@ -72,7 +72,7 @@ public class ReadMap {
             this.height = Integer.parseInt(sCurrentLine.split(" ")[0]);
             System.out.println("height : " + height);
             System.out.println("width: " + width);
-            int i = 0;
+            int i = -1;
             int j = 0;
 
             
@@ -82,12 +82,13 @@ public class ReadMap {
             grid = gfac.createGrid("grid", context, gbp);
 
             
-            while ((sCurrentLine = br.readLine()) != null && i <= this.height) {
+            while ((sCurrentLine = br.readLine()) != null && i < this.height) {
             	j = 0;
-
+            	System.out.println(sCurrentLine);
                 for (String mapElt : sCurrentLine.split(" ")) {
                 	// System.out.println("mapElt: " + mapElt);
                 	
+                 	
                     switch (mapElt) {
                         case "F": { // Forest
                         	Place forest = new Place(j, i, grid, PlaceType.FOREST, 0, 0, 0);
@@ -161,14 +162,19 @@ public class ReadMap {
 
             for (int r = 0; r < 2; ++r) {
             	sCurrentLine = br.readLine(); 
+  //          	System.out.println("br: " + sCurrentLine);
             	String[] gender = sCurrentLine.split(" ");
             	switch (gender[0]) {
             		case "male"   : { this.nbMale = Integer.valueOf(gender[1]); break; }
             		case "female" : { this.nbFemale = Integer.valueOf(gender[1]); break; }
             	}
             }
+            System.out.println("nb homme: " + this.nbMale);
+            System.out.println("nb femme: " + this.nbFemale);
                       
             while ((sCurrentLine = br.readLine()) != null) {
+
+        //    	System.out.println("br: " + sCurrentLine);
                 String[] agentStat = sCurrentLine.split(" ");
                 switch (agentStat[0]) {
             		case "BANKER"  : { this.bankerProb = Float.valueOf(agentStat[1]); break; }

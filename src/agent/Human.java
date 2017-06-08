@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import action.Action;
 import agent.place.House;
 import job.Job;
+import job.Student;
+import repast.simphony.random.RandomHelper;
 import repast.simphony.space.grid.Grid;
 
 public class Human extends Agent{
@@ -12,10 +14,10 @@ public class Human extends Agent{
 	private int maxAge;
 	private int age;
 
-	private int mood = 50;
-	private int energy = 50;
-	private int hunger = 50;
-	private int education = 50;
+	private int mood;
+	private int energy;
+	private int hunger;
+	private int education;
 
 	private ArrayList<Human> parents;
 	private ArrayList<Human> siblings;
@@ -25,15 +27,49 @@ public class Human extends Agent{
 	private Job job;
 	private House house;
 
-	public Human(int i, int j, Grid<Agent> grid) {
+	public Human(int i, int j, Grid<Agent> grid, Human father, Human mother) {
 		super(i, j, grid);
+		
+		this.gender = RandomHelper.nextIntFromTo(0, 1);
+		this.maxAge = RandomHelper.createNormal(75, 10).nextInt();
+		this.age 	= 0;
+		
+		this.mood 		= 50;
+		this.energy 	= 50;
+		this.hunger 	= 50;
+		this.education 	= 0;
+		
+		this.parents 	= new ArrayList<>();
+		this.siblings 	= new ArrayList<>();
+		this.children 	= new ArrayList<>();
+		
+		this.parents.add(father);
+		this.parents.add(mother);
+		this.siblings.addAll(father.children); // TODO: le father instancie l'enfant puis l'ajoute lors de la reproduction à ses children.
+		
+		this.currentAction 	= null;
+		this.job 			= new Student();
+		father.house.add(this);
 	}
 	
 	public Human(int i, int j, Grid<Agent> grid, int gender, int age, Job job) {
 		super(i, j, grid);
 		this.gender = gender;
-		this.age = age;
-		this.job = job;
+		this.maxAge = RandomHelper.createNormal(75, 10).nextInt();
+		this.age 	= age;
+
+		this.mood 		= 50;
+		this.energy 	= 50;
+		this.hunger 	= 50;
+		this.education 	= 50;
+
+		this.parents 	= new ArrayList<>();
+		this.siblings 	= new ArrayList<>();
+		this.children 	= new ArrayList<>();
+
+		this.currentAction 	= null;
+		this.job 			= job;
+		this.house 			= null;
 	}
 
 	public void addMood(int mood) {
@@ -48,6 +84,10 @@ public class Human extends Agent{
 	public void addEducation(int education) {
 		this.education += education;
 	}
+	public void addHouse(House house) {
+		this.house = house;
+	}
+
 	public int getMood() {
 		return mood;
 	}
@@ -57,6 +97,15 @@ public class Human extends Agent{
 	public int getHunger() {
 		return hunger;
 	}
+	public ArrayList<Human> getParents() {
+		return this.parents;
+	}
+	public ArrayList<Human> getSiblings() {
+		return this.siblings;
+	}
+	public ArrayList<Human> getChildren() {
+		return this.children;
+	}
 	public int getEducation() {
 		return education;
 	}
@@ -65,10 +114,6 @@ public class Human extends Agent{
 	}
 	public House getHouse() {
 		return this.house;
-	}
-	
-	public void addHouse(House house) {
-		this.house = house;
 	}
 
 	@Override

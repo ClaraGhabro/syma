@@ -49,6 +49,7 @@ public class ReadMap {
 	
 	public ReadMap() {
 		this.path = "tests/carte.txt";
+		//this.path = "tests/carte_02.txt";
 		//this.path = "tests/carte_01.txt";
 
 	}

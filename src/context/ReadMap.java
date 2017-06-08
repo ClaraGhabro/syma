@@ -83,8 +83,10 @@ public class ReadMap {
 
             
             while ((sCurrentLine = br.readLine()) != null && i <= this.height) {
+            	j = 0;
+
                 for (String mapElt : sCurrentLine.split(" ")) {
-             //       System.out.println("mapElt: " + mapElt);
+                	// System.out.println("mapElt: " + mapElt);
                 	
                     switch (mapElt) {
                         case "F": { // Forest
@@ -152,7 +154,6 @@ public class ReadMap {
                     }
                     j++;
                 }
-                System.out.println(sCurrentLine);
                 i++;
             }
             System.out.println("nb de House : " + nbHouse);

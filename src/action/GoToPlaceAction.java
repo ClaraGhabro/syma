@@ -39,6 +39,11 @@ public class GoToPlaceAction extends Action {
 
 		int x = human.getX();
 		int y = human.getY();
+		
+		// DEBUG
+		System.out.println(x);
+		System.out.println(y);
+		
 		distances[x][y] = 0;
 		Place currentPlace = ContextCreator.getPlaceAt(x, y);
 		int dxs[] = {0, 0, -1, 1};

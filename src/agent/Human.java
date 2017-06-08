@@ -3,7 +3,9 @@ package agent;
 import java.util.ArrayList;
 
 import action.Action;
+import action.GoToPlaceAction;
 import agent.place.House;
+import agent.place.PlaceType;
 import job.Job;
 import job.Student;
 import repast.simphony.random.RandomHelper;
@@ -135,6 +137,8 @@ public class Human extends Agent{
 		}
 		
 		if (currentAction == null) {
+			// DEBUG:
+			currentAction = new GoToPlaceAction(this, PlaceType.FIELD);
 			// TODO: Reproduire (Si partenaire � la maison, maisons disponibles pour le sexe, assez vieux), ou combler le besoin au minimum (mood, energy, food, money)
 			currentAction.initiate();
 		}

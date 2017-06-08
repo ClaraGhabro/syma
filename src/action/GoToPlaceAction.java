@@ -13,12 +13,12 @@ import context.ContextCreator;
 import repast.simphony.space.grid.Grid;
 
 public class GoToPlaceAction extends Action {
-	private PlaceType type;
+	private PlaceType placeType;
 	private ArrayList<Point2D> positions;
 
 	public GoToPlaceAction(Human human, PlaceType placeType) {
 		super(human);
-		this.type = placeType;
+		this.placeType = placeType;
 		this.positions = new ArrayList<>();
 	}
 
@@ -42,32 +42,31 @@ public class GoToPlaceAction extends Action {
 		
 		distances[x][y] = 0;
 		Place currentPlace = ContextCreator.getPlaceAt(x, y);
-		int dxs[] = {0, 0, -1, 1};
-		int dys[] = {-1, 1, 0, 0};
-
-		for (int dx: dxs)
-			System.out.println(dx);
+		successors.add(currentPlace);
 		
-		while (successors.size() != 0 && currentPlace.getType() != type) {
-			for (int dx: dxs) {
-				System.out.println(dx);
-				for (int dy: dys) {
-					System.out.println(dy);
-					Place neighbour = ContextCreator.getPlaceAt(x + dx, y + dy);
-					if (neighbour != null) {
-						int distance = distances[x][y] + 100 / Integer.min(Integer.min(	human.getMood() / neighbour.getMood(),
-																						human.getEnergy() / neighbour.getEnergy()),
-																						human.getHunger() / neighbour.getHunger());
-						if (distance < distances[x + dx][y + dx]) {
-							distances[x + dx][y + dy] = distance;
-							predecessors[x + dx][y + dy] = new Point2D(x, y);
-							successors.add(neighbour);
-						}
+		int dxs[] = {-1, 1, 0, 0};
+		int dys[] = {0, 0, -1, 1};
+		
+		while (successors.size() != 0 && currentPlace.getType() != placeType) {
+			for (int i = 0; i < 4; i++) {
+				int dx = dxs[i];
+				int dy = dys[i];
+				Place neighbour = ContextCreator.getPlaceAt(x + dx, y + dy);
+				if (neighbour != null && neighbour.isAccessibleTo(human)) {
+					int distance = distances[x][y] + 100 / Integer.min(Integer.min(	human.getMood() / neighbour.getMood(),
+																					human.getEnergy() / neighbour.getEnergy()),
+																					human.getHunger() / neighbour.getHunger());
+					if (x + dx >= 0 && x + dx < width
+							&& y + dy >= 0 && y + dy < height
+							&& distance < distances[x + dx][y + dy]) {
+						distances[x + dx][y + dy] = distance;
+						predecessors[x + dx][y + dy] = new Point2D(x, y);
+						successors.add(neighbour);
 					}
 				}
 			}
-			
-			int min = Integer.MAX_VALUE;
+
+			int min = Integer.MAX_VALUE / 4;
 			int iMin = 0;
 			for (int i = 0; i < successors.size(); i++) {
 				Place p = successors.get(i);
@@ -82,7 +81,7 @@ public class GoToPlaceAction extends Action {
 			successors.remove(iMin);
 		}
 		
-		if (currentPlace.getType() != type) {
+		if (currentPlace.getType() != placeType) {
 			this.positions.add(new Point2D(human.getX(), human.getY()));
 		}
 		else {
@@ -102,18 +101,16 @@ public class GoToPlaceAction extends Action {
 	public void step() {
 		Point2D position = positions.get(0);
 
-		// DEBUG
-		System.out.println(positions.size());
-		System.out.println(positions);
-		System.out.println("Go to");
-		System.out.println(position);
-		System.out.println("From");
-		System.out.println(new Point2D(human.getX(), human.getY()));
-		System.out.println(" ");
-
 		if (ContextCreator.getPlaceAt((int) position.x, (int) position.y).isAccessibleTo(human)) {
-			ContextCreator.getGrid().moveTo(human, (int) positions.get(0).x, (int) positions.get(0).y);
+			ContextCreator.getGrid().moveTo(human, (int) position.x, (int) position.y);
+
 			positions.remove(0);
+			human.setX((int) position.x);
+			human.setY((int) position.y);
+		}
+		else {
+			this.duration = 0;
+			this.positions = new ArrayList<>();
 		}
 	}
 }

@@ -48,8 +48,8 @@ public class ReadMap {
 	public static ArrayList<Place> place = new ArrayList<Place>();
 	
 	public ReadMap() {
-		//this.path = "tests/carte.txt";
-		this.path = "tests/carte_01.txt";
+		this.path = "tests/carte.txt";
+		//this.path = "tests/carte_01.txt";
 
 	}
 	
@@ -197,12 +197,12 @@ public class ReadMap {
             			currHouse.add(human);
             			context.add(human);
             			grid.moveTo(human, currHouse.getX(), currHouse.getY());
+            			break;
             		}
             	}
             }
 
             for (int k = 0; k < this.nbMale; ++k) {
-            	
             	for (int n = 0; n < this.nbHouse; ++n) {
          			House currHouse = findHouse(n);
          			ArrayList<Human> tmplist = currHouse.getInhabitants(); 
@@ -211,13 +211,11 @@ public class ReadMap {
                     	currHouse.add(human);
                     	people.add(human);
                     	context.add(human);
-                    	grid.moveTo(human, currHouse.getX(), currHouse.getY());        		}
+                    	grid.moveTo(human, currHouse.getX(), currHouse.getY());
+                    	break;
+                    }
             	}
-    
             }
-
-            
-            
         } catch (IOException e) {
             e.printStackTrace();
         } finally {

@@ -42,10 +42,10 @@ public class ReadMap {
 	
 	private int nbMale = 0;
 	private int nbFemale = 0;
-	private int nbHouse = 0;
+	public static int nbHouse = 0;
 	
-	private ArrayList<Human> people = new ArrayList<Human>();
-	private ArrayList<Place> place = new ArrayList<Place>();
+	private static ArrayList<Human> people = new ArrayList<Human>();
+	public static ArrayList<Place> place = new ArrayList<Place>();
 	
 	public ReadMap() {
 		//this.path = "tests/carte.txt";
@@ -251,14 +251,14 @@ public class ReadMap {
 			return new Teacher();
 	}
 	
-	public House findHouse(int position) {
-		for (int i = 0; i < this.place.size(); ++i) {
-			if (this.place.get(i) instanceof House) {
+	public static House findHouse(int position) {
+		for (int i = 0; i < place.size(); ++i) {
+			if (place.get(i) instanceof House) {
 				
 	//			System.out.println("cest une house");
 				if (position == 0) {
 		//			System.out.println("c'est laaaaaa maisons");
-					return (House) this.place.get(i);
+					return (House) place.get(i);
 				}
 				position--;
 				
@@ -268,11 +268,11 @@ public class ReadMap {
 		return null;
 	}
 
-	public School findSchool(int position) {
-		for (int i = 0; i < this.place.size(); ++i) {
-			if (this.place.get(i) instanceof School) {
+	public static School findSchool(int position) {
+		for (int i = 0; i < place.size(); ++i) {
+			if (place.get(i) instanceof School) {
 				if (position == 0)
-					return (School) this.place.get(i);
+					return (School) place.get(i);
 				position--;
 			}
 
@@ -280,11 +280,11 @@ public class ReadMap {
 		return null;
 	}
 
-	public Field findField(int position) {
-		for (int i = 0; i < this.place.size(); ++i) {
-			if (this.place.get(i) instanceof Field) {
+	public static Field findField(int position) {
+		for (int i = 0; i < place.size(); ++i) {
+			if (place.get(i) instanceof Field) {
 				if (position == 0)
-					return (Field) this.place.get(i);
+					return (Field) place.get(i);
 				position--;
 			}
 
@@ -292,11 +292,11 @@ public class ReadMap {
 		return null;
 	}
 	
-	public Road findRoad(int position) {
-		for (int i = 0; i < this.place.size(); ++i) {
-			if (this.place.get(i) instanceof Road) {
+	public static Road findRoad(int position) {
+		for (int i = 0; i < place.size(); ++i) {
+			if (place.get(i) instanceof Road) {
 				if (position == 0)
-					return (Road) this.place.get(i);
+					return (Road) place.get(i);
 				position--;
 			}
 
@@ -304,11 +304,11 @@ public class ReadMap {
 		return null;
 	}
 	
-	public Place findLand(int position) {
-		for (int i = 0; i < this.place.size(); ++i) {
-			if (this.place.get(i) instanceof Place && this.place.get(i).getType() == PlaceType.LAND) {
+	public static Place findLand(int position) {
+		for (int i = 0; i < place.size(); ++i) {
+			if (place.get(i) instanceof Place && place.get(i).getType() == PlaceType.LAND) {
 				if (position == 0)
-					return (Place) this.place.get(i);
+					return (Place) place.get(i);
 				position--;
 			}
 
@@ -316,11 +316,11 @@ public class ReadMap {
 		return null;
 	}
 	
-	public Place findConcrete(int position) {
-		for (int i = 0; i < this.place.size(); ++i) {
-			if (this.place.get(i) instanceof Place && this.place.get(i).getType() == PlaceType.CONCRETE) {
+	public static Place findConcrete(int position) {
+		for (int i = 0; i < place.size(); ++i) {
+			if (place.get(i) instanceof Place && place.get(i).getType() == PlaceType.CONCRETE) {
 				if (position == 0)
-					return (Place) this.place.get(i);
+					return (Place) place.get(i);
 				position--;
 			}
 
@@ -328,11 +328,11 @@ public class ReadMap {
 		return null;
 	}
 	
-	public Place findWater(int position) {
-		for (int i = 0; i < this.place.size(); ++i) {
-			if (this.place.get(i) instanceof Place && this.place.get(i).getType() == PlaceType.WATER) {
+	public static Place findWater(int position) {
+		for (int i = 0; i < place.size(); ++i) {
+			if (place.get(i) instanceof Place && place.get(i).getType() == PlaceType.WATER) {
 				if (position == 0)
-					return (Place) this.place.get(i);
+					return (Place) place.get(i);
 				position--;
 			}
 
@@ -340,11 +340,11 @@ public class ReadMap {
 		return null;
 	}
 	
-	public Place findPark(int position) {
-		for (int i = 0; i < this.place.size(); ++i) {
-			if (this.place.get(i) instanceof Place && this.place.get(i).getType() == PlaceType.PARK) {
+	public static Place findPark(int position) {
+		for (int i = 0; i < place.size(); ++i) {
+			if (place.get(i) instanceof Place && place.get(i).getType() == PlaceType.PARK) {
 				if (position == 0)
-					return (Place) this.place.get(i);
+					return (Place) place.get(i);
 				position--;
 			}
 
@@ -353,11 +353,11 @@ public class ReadMap {
 	}
 	
 	
-	public Place findForest(int position) {
-		for (int i = 0; i < this.place.size(); ++i) {
-			if (this.place.get(i) instanceof Place && this.place.get(i).getType() == PlaceType.FOREST) {
+	public static Place findForest(int position) {
+		for (int i = 0; i < place.size(); ++i) {
+			if (place.get(i) instanceof Place && place.get(i).getType() == PlaceType.FOREST) {
 				if (position == 0)
-					return (Place) this.place.get(i);
+					return (Place) place.get(i);
 				position--;
 			}
 

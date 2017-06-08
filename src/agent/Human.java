@@ -3,12 +3,18 @@ package agent;
 import java.util.ArrayList;
 
 import action.Action;
+import action.BuyFoodAction;
+import action.GoToHumanAction;
 import action.GoToPlaceAction;
+import action.SleepAction;
+import action.WaitAction;
 import agent.place.House;
 import agent.place.Place;
 import agent.place.PlaceType;
 import context.ContextCreator;
+import context.ReadMap;
 import job.Job;
+import job.JobType;
 import job.Student;
 import repast.simphony.random.RandomHelper;
 import repast.simphony.space.grid.Grid;
@@ -49,7 +55,7 @@ public class Human extends Agent{
 		
 		this.parents.add(father);
 		this.parents.add(mother);
-		this.siblings.addAll(father.children); // TODO: le father instancie l'enfant puis l'ajoute lors de la reproduction à ses children.
+		this.siblings.addAll(father.children); // TODO: le father instancie l'enfant puis l'ajoute lors de la reproduction a ses children.
 		
 		this.currentAction 	= null;
 		this.job 			= new Student();
@@ -146,7 +152,8 @@ public class Human extends Agent{
 		if (currentAction == null) {
 			// DEBUG:
 			currentAction = new GoToPlaceAction(this, PlaceType.FIELD);
-			// TODO: Reproduire (Si partenaire ï¿½ la maison, maisons disponibles pour le sexe, assez vieux), ou combler le besoin au minimum (mood, energy, food, money)
+			// TODO: Reproduire (Si partenaire a la maison, maisons disponibles pour le sexe, assez vieux),
+			// ou combler le besoin au minimum (mood, energy, food, money)
 			currentAction.initiate();
 		}
 		currentAction.step();
@@ -154,17 +161,48 @@ public class Human extends Agent{
 	
 	public Action goGetMood() {
 		// TODO: si dans un parc, WaitAction, sinon GoToPlaceAction => Parc
-		return null;
+		Place place = ContextCreator.getPlaceAt(this.x, this.y);
+		if (place.getType() == PlaceType.PARK) {
+			WaitAction wait = new WaitAction(this);
+			wait.initiate();
+			return wait;
+		}
+		return new GoToPlaceAction(this, PlaceType.PARK);
 	}
 	
 	public Action goGetSleep() {
-		// TODO: si ï¿½ la maison, SleepAction, sinon GoToPlaceAction => House
-		return null;
+		Place place = ContextCreator.getPlaceAt(this.x, this.y);
+		if (place.getType() == PlaceType.HOUSE) {
+			SleepAction sleep = new SleepAction(this);
+			sleep.initiate();
+			return sleep;
+		}
+		GoToPlaceAction goPlace = new GoToPlaceAction(this, PlaceType.HOUSE);
+		goPlace.initiate();
+		return goPlace;
 	}
 	
 	public Action goGetFood() {
-		// TODO: si auprï¿½s d'un Seller => BuyFood, sinon GoToHumanAction => Seller
-		return null;
+		// if Human is a Seller, don't need to buy, just eat
+		if (this.job.getJobType() == JobType.SELLER) {
+			BuyFoodAction buy = new BuyFoodAction(this); // this);
+			buy.initiate();
+			return buy;
+		}
+		
+		Place place = ContextCreator.getPlaceAt(this.x,  this.y);
+		ArrayList<Human> humans = ContextCreator.getHumansWithJobAt(this.x, this.y, JobType.SELLER);
+		for (Human someone: humans) {
+			if (someone.x == this.x && someone.y == this.y){
+				BuyFoodAction buy = new BuyFoodAction(this); //this);
+				buy.initiate();
+				return buy;
+			}		
+		}
+		
+		GoToHumanAction goHuman = new GoToHumanAction(this, JobType.SELLER);
+		goHuman.initiate();
+		return goHuman;
 	}
 	
 	public Action goGetMoney() {
@@ -173,7 +211,21 @@ public class Human extends Agent{
 	
 	public Action goGetAdulthood() {
 		int budget = house.remove(this);
+		for (int i = 0; i < ReadMap.nbHouse; ++i) {
+			House newHouse = ReadMap.findHouse(i);
+			ArrayList<Human> inhabitant = newHouse.getInhabitants(); 
+			
+			if (newHouse.getInhabitants().isEmpty() 
+					|| inhabitant.size() == 1 && inhabitant.get(0).gender != this.gender) {
+				newHouse.add(this);
+				WaitAction wait = new WaitAction(this);
+				wait.initiate();
+				return wait;
+			}
+		}
 		// TODO: remove de la House avec une part de l'argent, transfert dans une autre maison disponible, acquiert un nouveau job
-		return null;
+		WaitAction wait = new WaitAction(this);
+		wait.initiate();
+		return wait;
 	}
 }

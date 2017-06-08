@@ -54,9 +54,9 @@ public class GoToPlaceAction extends Action {
 				int dy = dys[i];
 				Place neighbour = ContextCreator.getPlaceAt(x + dx, y + dy);
 				if (neighbour != null && neighbour.isAccessibleTo(human)) {
-					int distance = distances[x][y] + 100 / Integer.min(Integer.min(	human.getMood() 	/ neighbour.getMood(),
-																					human.getEnergy() 	/ neighbour.getEnergy()),
-																					human.getHunger() 	/ neighbour.getHunger());
+					int distance = distances[x][y] + (int) (100 / Float.min(Float.min(	human.getMood() 	/ neighbour.getMood(),
+																						human.getEnergy() 	/ neighbour.getEnergy()),
+																						human.getHunger() 	/ neighbour.getHunger()));
 					if (x + dx >= 0 && x + dx < width
 							&& y + dy >= 0 && y + dy < height
 							&& distance < distances[x + dx][y + dy]) {

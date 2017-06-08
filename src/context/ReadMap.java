@@ -91,21 +91,21 @@ public class ReadMap {
                  	
                     switch (mapElt) {
                         case "F": { // Forest
-                        	Place forest = new Place(j, i, grid, PlaceType.FOREST, 0, 0, 0);
+                        	Place forest = new Place(j, i, grid, PlaceType.FOREST, 2, 3, 3);
                         	place.add(forest);
                         	context.add(forest);
                         	grid.moveTo(forest, j, i);
                         	break; 
                         }
                         case "f": { // Field 
-                        	Field field = new Field(j, i, grid, 0, 0, 0);
+                        	Field field = new Field(j, i, grid, 1, 2, 1);
                         	place.add(field);
                         	context.add(field);
                         	grid.moveTo(field, j, i);
                         	break;
                         }
                         case "W": { // Water
-                        	Place water = new Place(j, i, grid, PlaceType.WATER, 0, 0, 0);
+                        	Place water = new Place(j, i, grid, PlaceType.WATER, 10, 10, 10);
                         	place.add(water);
                         	context.add(water);
                         	grid.moveTo(water,  j, i);
@@ -113,40 +113,40 @@ public class ReadMap {
                         }
                         case "H": { // House 
                         	nbHouse++;
-                        	House house = new House(j, i, grid, 0, 0, 0);
+                        	House house = new House(j, i, grid, 1, 1, 1);
                         	place.add(house);
                         	context.add(house);
                         	grid.moveTo(house, j, i);
                         	break;
                         }
                         case "R": { // Road
-                        	Place road = new Road(j, i, grid, 0, 0, 0);
+                        	Place road = new Road(j, i, grid, 1, 1, 1);
                         	place.add(road);
                         	context.add(road);
                         	grid.moveTo(road,  j, i);
                         	break;
                         }
                         case "L": { // Land
-                        	Place land = new Place(j, i, grid, PlaceType.LAND, 0, 0, 0);
+                        	Place land = new Place(j, i, grid, PlaceType.LAND, 2, 2, 2);
                         	place.add(land);
                         	context.add(land);
                         	grid.moveTo(land,  j, i);
                         	break; }
                         case "C": { // Concrete
-                        	Place concrete = new Place(j, i, grid, PlaceType.CONCRETE, 0, 0, 0);
+                        	Place concrete = new Place(j, i, grid, PlaceType.CONCRETE, 2, 1, 1);
                         	place.add(concrete);
                         	context.add(concrete);
                         	grid.moveTo(concrete,  j, i);
                         	break; }
                         case "S" : { // School
-                        	Place school = new School(j, i, grid, 0, 0, 0);
+                        	Place school = new School(j, i, grid, 1, 1, 1);
                         	place.add(school);
                         	context.add(school);
                         	grid.moveTo(school,  j, i);
                         	break;
                         }
                         case "P" : { // Park
-                        	Place park = new Place(j, i, grid, PlaceType.PARK, 0, 0, 0);
+                        	Place park = new Place(j, i, grid, PlaceType.PARK, 1, 1, 1);
                         	place.add(park);
                         	context.add(park);
                         	grid.moveTo(park,  j, i);

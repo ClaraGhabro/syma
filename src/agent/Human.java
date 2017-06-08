@@ -167,11 +167,9 @@ public class Human extends Agent{
 	@Override
 	public void update() {
 		Place currentPlace = ContextCreator.getPlaceAt(x, y);
-		this.addMood(currentPlace.getMood());
-		this.addEnergy(currentPlace.getEnergy());
-		this.addHunger(currentPlace.getHunger());
+		currentPlace.affect(this);
 
-		if (RunEnvironment.getInstance().getCurrentSchedule().getTickCount() % 52560 == 0) {
+		if (RunEnvironment.getInstance().getCurrentSchedule().getTickCount() % Constants.yearCount == 0) {
 			age++;
 			reproduceCount--;
 		}
@@ -194,19 +192,30 @@ public class Human extends Agent{
 			if (age >= 25 && age < 35
 					&& reproduceCount <= 0 && minNeed > 40
 					&& house.getPartner(gender) != null
-					&& ReadMap.findEmptyHouses(gender).size() != 0)
+					&& ReadMap.findEmptyHouses(gender).size() != 0) {
+				System.out.println("SEX");
 				currentAction = new ReproduceAction(this, house.getPartner(gender));
-			else if (mood == minNeed)
+			}
+			else if (mood == minNeed) {
+				System.out.println("MOOD");
 				currentAction = goGetMood();
-			else if (energy == minNeed)
+			}
+			else if (energy == minNeed) {
+				System.out.println("SLEEP");
 				currentAction = goGetSleep();
-			else if (hunger == minNeed)
+			}
+			else if (hunger == minNeed) {
+				System.out.println("FOOD");
 				currentAction = goGetFood();
-			else if ((int) house.getMoney() / house.getInhabitants().size() == minNeed)
+			}
+			else if ((int) house.getMoney() / house.getInhabitants().size() == minNeed) {
+				System.out.println("WORK");
 				currentAction = job.getNextStep(this);
+			}
 			
 			currentAction.initiate();
 		}
+		System.out.println(currentAction);
 		currentAction.step();
 	}
 	

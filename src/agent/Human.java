@@ -12,10 +12,10 @@ public class Human extends Agent{
 	private int maxAge;
 	private int age;
 
-	private int mood;
-	private int energy;
-	private int hunger;
-	private int education;
+	private int mood = 50;
+	private int energy = 50;
+	private int hunger = 50;
+	private int education = 50;
 
 	private ArrayList<Human> parents;
 	private ArrayList<Human> siblings;
@@ -65,6 +65,10 @@ public class Human extends Agent{
 	}
 	public House getHouse() {
 		return this.house;
+	}
+	
+	public void addHouse(House house) {
+		this.house = house;
 	}
 
 	@Override

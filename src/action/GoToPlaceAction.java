@@ -93,7 +93,10 @@ public class GoToPlaceAction extends Action {
 
 	@Override
 	public void step() {
-		ContextCreator.getGrid().moveTo(human, (int) positions.get(0).x, (int) positions.get(0).y);
-		positions.remove(0);
+		Point2D position = positions.get(0);
+		if (ContextCreator.getPlaceAt((int) position.x, (int) position.y).isAccessibleTo(human)) {
+			ContextCreator.getGrid().moveTo(human, (int) positions.get(0).x, (int) positions.get(0).y);
+			positions.remove(0);
+		}
 	}
 }

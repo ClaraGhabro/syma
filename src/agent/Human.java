@@ -17,6 +17,7 @@ import context.ReadMap;
 import job.Job;
 import job.JobType;
 import job.Student;
+import repast.simphony.engine.environment.RunEnvironment;
 import repast.simphony.random.RandomHelper;
 import repast.simphony.space.grid.Grid;
 
@@ -162,8 +163,9 @@ public class Human extends Agent{
 		this.addMood(currentPlace.getMood());
 		this.addEnergy(currentPlace.getEnergy());
 		this.addHunger(currentPlace.getHunger());
-		
-		age++;		
+
+		if (RunEnvironment.getInstance().getCurrentSchedule().getTickCount() % 52560 == 0)
+			age++;		
 		currentAction.update();
 		
 		if (currentAction.getDuration() == 0)
@@ -182,13 +184,8 @@ public class Human extends Agent{
 			// BEG: DEBUG
 			currentAction = new GoToPlaceAction(this, PlaceType.FIELD);
 			currentAction.initiate();
-			if (currentAction.getDuration() == 0) {
-				System.out.println("WAIT");
+			if (currentAction.getDuration() == 0)
 				currentAction = new WaitAction(this);
-			}
-			else {
-				System.out.println("GOING");
-			}
 			// END: DEBUG
 			// TODO: Reproduire (Si partenaire a la maison, maisons disponibles pour le sexe, assez vieux),
 			// ou combler le besoin au minimum (mood, energy, food, money)

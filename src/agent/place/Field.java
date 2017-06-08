@@ -3,6 +3,7 @@ package agent.place;
 import agent.Agent;
 import agent.Human;
 import job.Farmer;
+import repast.simphony.engine.environment.RunEnvironment;
 import repast.simphony.random.RandomHelper;
 import repast.simphony.space.grid.Grid;
 
@@ -50,7 +51,8 @@ public class Field extends Place {
 
 	@Override
 	public void update() {
-		this.age = (age + 1) % maxAge;
+		if (RunEnvironment.getInstance().getCurrentSchedule().getTickCount() % 400 == 0)
+			this.age = (age + 1) % maxAge;
 	}
 
 	@Override

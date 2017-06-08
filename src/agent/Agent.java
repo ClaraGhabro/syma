@@ -21,10 +21,15 @@ public abstract class Agent {
 		this.y = j;
 	}
 	
+	public void setX(int x) {
+		this.x = x;
+	}
+	public void setY(int y) {
+		this.y = y;
+	}
 	public int getX() {
 		return x;
 	}
-
 	public int getY() {
 		return y;
 	}
@@ -42,6 +47,7 @@ public abstract class Agent {
 	protected void die() {
 		Context<Agent> context = ContextUtils.getContext(this);
 		context.remove(this);
+		System.err.println("DIE");
 	}
 
 	/*

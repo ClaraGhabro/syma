@@ -19,5 +19,5 @@ public class Constants {
 	public final static int sleepEnergy = 10;
 	public final static int foodHunger = 10;
 	public final static int reproducingEnergy = -10;
-	public final static List<String> names = Arrays.asList("Léa", "Clara", "Guillaume", "Anatole", "Justin", "Justine");
+	public final static List<String> names = Arrays.asList("Léa", "Clara", "Guillaume", "Anatole", "Justin", "Justine", "Xavier", "Joséphine");
 }

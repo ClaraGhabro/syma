@@ -13,9 +13,9 @@ public class Place extends Agent {
 	public Place(int i, int j, Grid<Agent> grid, PlaceType type, int mood, int energy, int hunger) {
 		super(i, j, grid);
 		this.type = type;
-		this.mood = mood;
-		this.energy = energy;
-		this.hunger = hunger;
+		this.mood = mood + 1; // DEBUG + 1
+		this.energy = energy + 1; // DEBUG + 1
+		this.hunger = hunger + 1; // DEBUG + 1
 	}
 
 	public void affect(Human human) {

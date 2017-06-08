@@ -9,6 +9,7 @@ public class HarvestAction extends Action {
 	public HarvestAction(Human human, Field field) {
 		super(human);
 		this.field = field;
+		this.type = new String("Is harversting");
 	}
 
 	@Override

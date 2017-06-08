@@ -189,12 +189,13 @@ public class ReadMap {
             	for (int n = 0; n < this.nbHouse; ++n) {
             		House currHouse = findHouse(n);
             		if (currHouse == null)
-            			System.out.println("c'est la meeeeerde");
-            		ArrayList<Human> tmplist = currHouse.getInhabitants(); 
+            			System.out.println("Plus d'habitation disponible.");
+            		ArrayList<Human> tmplist = currHouse.getInhabitants();
             		if (tmplist.isEmpty()){
             			Human human = new Human(currHouse.getX(), currHouse.getY(), grid, 1, 20, selectJob());
             			people.add(human);
             			currHouse.add(human);
+                    	human.addHouse(currHouse);
             			context.add(human);
             			grid.moveTo(human, currHouse.getX(), currHouse.getY());
             			break;
@@ -205,10 +206,13 @@ public class ReadMap {
             for (int k = 0; k < this.nbMale; ++k) {
             	for (int n = 0; n < this.nbHouse; ++n) {
          			House currHouse = findHouse(n);
+            		if (currHouse == null)
+            			System.out.println("Plus d'habitation disponible.");
          			ArrayList<Human> tmplist = currHouse.getInhabitants(); 
-            		if (tmplist.size() == 1){
+            		if (tmplist.size() == 1 && tmplist.get(0).getGender() == 1){
             			Human human = new Human(currHouse.getX(), currHouse.getY(), grid, 0, 20, selectJob());
                     	currHouse.add(human);
+                    	human.addHouse(currHouse);
                     	people.add(human);
                     	context.add(human);
                     	grid.moveTo(human, currHouse.getX(), currHouse.getY());

@@ -1,10 +1,12 @@
 package action;
 
 import agent.Human;
+import context.Constants;
 
 public class SleepAction extends Action {
 	public SleepAction(Human human) {
 		super(human);
+		this.type = new String("Is sleeping");
 	}
 
 	@Override
@@ -14,6 +16,6 @@ public class SleepAction extends Action {
 
 	@Override
 	public void step() {
-		this.human.addEnergy(10);
+		this.human.addEnergy(Constants.sleepEnergy);
 	}
 }

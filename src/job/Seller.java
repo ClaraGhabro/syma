@@ -1,6 +1,7 @@
 package job;
 
 import action.Action;
+import action.WaitAction;
 import agent.Human;
 
 public class Seller extends Job {
@@ -10,8 +11,6 @@ public class Seller extends Job {
 
 	@Override
 	public Action getNextStep(Human human) {
-		// TODO: Va � un hungry human, sinon random
-		return null;
+		return new WaitAction(human);
 	}
-
 }

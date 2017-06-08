@@ -1,20 +1,22 @@
 package action;
 
 import agent.Human;
+import context.Constants;
 
 public class LearnAction extends Action {
 
 	public LearnAction(Human human) {
 		super(human);
+		this.type = new String("Is in class");
 	}
 
 	@Override
 	public void initiate() {
-		// TODO: Calculer la durée d'éducation en fonction de l'argent		
+		this.duration = Math.min(Constants.schoolDuration, (int)(human.getHouse().getMoney() / Constants.schoolPrice));
 	}
 
 	@Override
 	public void step() {
-		// TODO: échanger de l'argent contre de l'éducation auprès du professeur
+		this.human.getHouse().addMoney(-Constants.schoolPrice);
 	}
 }

@@ -18,6 +18,7 @@ public class GoToHumanAction extends Action {
 	public GoToHumanAction(Human human, JobType jobType) {
 		super(human);
 		this.jobType = jobType;
+		this.type = new String("Is looking for a " + jobType.toString());
 		this.positions = new ArrayList<>();
 	}
 

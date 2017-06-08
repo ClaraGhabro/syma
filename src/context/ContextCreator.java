@@ -7,6 +7,8 @@ import repast.simphony.space.grid.GridPoint;
 import repast.simphony.util.ContextUtils;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 import agent.Agent;
 import agent.Human;
@@ -56,6 +58,12 @@ public class ContextCreator implements ContextBuilder<Agent> {
 			if (obj instanceof Place)
 				return ((Place) obj);
 		return null;
+	}
+	
+	public static String getRandomName() {
+		List<String> names = Constants.names;
+		Random rnd = new Random();
+		return names.get(rnd.nextInt(names.size()));
 	}
 
 	public static Grid<Agent> getGrid() {

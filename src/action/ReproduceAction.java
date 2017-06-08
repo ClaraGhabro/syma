@@ -35,6 +35,10 @@ public class ReproduceAction extends Action {
 			addRandomHuman(human.getX(), human.getY());
 			this.human.addEnergy(Constants.reproducingEnergy);
 			this.huwoman.addEnergy(Constants.reproducingEnergy);
+
+			this.human.setReproduceCount(Constants.reproduceCount);
+			this.huwoman.setReproduceCount(Constants.reproduceCount);
+			
 			this.huwoman.resetAction();
 		}
 	}

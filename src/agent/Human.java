@@ -95,6 +95,9 @@ public class Human extends Agent{
 		this.name = ContextCreator.getRandomName();
 	}
 
+	public void setReproduceCount(int count) {
+		this.reproduceCount = count;
+	}
 	public void addMood(int mood) {
 		this.mood += mood;
 	}

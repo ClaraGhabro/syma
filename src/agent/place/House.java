@@ -44,7 +44,7 @@ public class House extends Place {
 	
 	public Human getPartner(Integer gender) {
 		for (Human human: inhabitants)
-			if (human.getGender() != gender)
+			if (human.getGender() != gender && human.getAge() > 20)
 				return human;
 		return null;
 	}

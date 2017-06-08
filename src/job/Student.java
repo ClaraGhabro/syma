@@ -3,7 +3,6 @@ package job;
 import action.Action;
 import action.GoToPlaceAction;
 import action.LearnAction;
-import action.WaitAction;
 import agent.Human;
 import agent.place.PlaceType;
 import context.Constants;

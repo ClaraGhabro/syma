@@ -2,6 +2,8 @@ package action;
 
 import agent.Human;
 import context.Constants;
+import context.ContextCreator;
+import job.JobType;
 
 public class TeachAction extends Action {
 
@@ -16,8 +18,7 @@ public class TeachAction extends Action {
 	}
 	
 	public int getNbStudents() {
-		// TODO
-		return 1;
+		return ContextCreator.getHumansWithJobAt(human.getX(), human.getY(), JobType.STUDENT).size();
 	}
 
 	@Override

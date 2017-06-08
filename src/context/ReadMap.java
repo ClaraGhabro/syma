@@ -1,5 +1,10 @@
 package context;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+
 import agent.Agent;
 import agent.Human;
 import agent.place.Field;
@@ -23,11 +28,6 @@ import repast.simphony.space.grid.Grid;
 import repast.simphony.space.grid.GridBuilderParameters;
 import repast.simphony.space.grid.SimpleGridAdder;
 import repast.simphony.space.grid.WrapAroundBorders;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
 
 public class ReadMap {
 	private String path;
@@ -234,7 +234,6 @@ public class ReadMap {
 		return grid;
     }
 	
-	
 	public Job selectJob() {
 		float sum = this.bankerProb;
 		Uniform u = RandomHelper.createUniform();
@@ -252,19 +251,29 @@ public class ReadMap {
 			return new Teacher();
 	}
 	
+	public static ArrayList<House> findEmptyHouses(Integer gender) {
+		ArrayList<House> result = new ArrayList<>();
+		for (Place p: place) {
+			if (p instanceof House) {
+				boolean empty = true;
+				for (Human h: ((House) p).getInhabitants())
+					if (h.getGender() == gender)
+						empty = false;
+				if (empty)
+					result.add((House) p);
+			}
+		}
+		return result;
+	}
+	
 	public static House findHouse(int position) {
 		for (int i = 0; i < place.size(); ++i) {
 			if (place.get(i) instanceof House) {
-				
-	//			System.out.println("cest une house");
 				if (position == 0) {
-		//			System.out.println("c'est laaaaaa maisons");
 					return (House) place.get(i);
 				}
-				position--;
-				
+				position--;				
 			}
-
 		}
 		return null;
 	}
@@ -361,11 +370,9 @@ public class ReadMap {
 					return (Place) place.get(i);
 				position--;
 			}
-
 		}
 		return null;
 	}
-	
 	
 	
 	public int getWidth() {
@@ -375,7 +382,6 @@ public class ReadMap {
 	public int getHeight() {
 		return this.height;
 	}
-	
 	
 	public float getBankerProb() {
 		return this.bankerProb;

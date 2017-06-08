@@ -42,6 +42,13 @@ public class House extends Place {
 		return this.inhabitants;
 	}
 	
+	public Human getPartner(Integer gender) {
+		for (Human human: inhabitants)
+			if (human.getGender() != gender)
+				return human;
+		return null;
+	}
+	
 	public double remove(Human human) {
 		int nbInhab = inhabitants.size();
 		

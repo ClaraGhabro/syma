@@ -94,8 +94,8 @@ public class GoToPlaceAction extends Action {
 			}
 			Collections.reverse(this.positions);
 		}
+
 		this.duration = positions.size();
-		System.out.println(positions);
 	}
 
 	@Override
@@ -110,7 +110,6 @@ public class GoToPlaceAction extends Action {
 			human.setY(position.y);
 		}
 		else {
-			System.out.println("ELSE");
 			this.duration = 0;
 			this.positions = new ArrayList<>();
 		}

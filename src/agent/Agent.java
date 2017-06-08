@@ -1,14 +1,9 @@
 package agent;
 
+import repast.simphony.context.Context;
 import repast.simphony.engine.schedule.ScheduledMethod;
-import repast.simphony.random.RandomHelper;
 import repast.simphony.space.grid.Grid;
 import repast.simphony.util.ContextUtils;
-
-import java.awt.Color;
-
-import cern.jet.random.Uniform;
-import repast.simphony.context.Context;
 
 public abstract class Agent {
 	protected Grid<Agent> grid;

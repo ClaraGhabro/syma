@@ -4,8 +4,8 @@ import action.Action;
 import action.GoToPlaceAction;
 import action.HarvestAction;
 import agent.Human;
-import agent.place.PlaceType;
 import agent.place.Field;
+import agent.place.PlaceType;
 import context.ContextCreator;
 
 public class Farmer extends Job {

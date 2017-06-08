@@ -18,13 +18,14 @@ public class GoToHumanAction extends Action {
 	public GoToHumanAction(Human human, JobType jobType) {
 		super(human);
 		this.jobType = jobType;
-		this.type = new String("Is looking for a " + jobType.toString());
 		this.positions = new ArrayList<>();
+		this.type = new String("Is looking for a " + jobType.toString());
 	}
 
 	@Override
 	public void initiate() {
 		Grid<Agent> grid = ContextCreator.getGrid();
+		this.positions = new ArrayList<>();
 		
 		int width = grid.getDimensions().getWidth();
 		int height = grid.getDimensions().getHeight();
@@ -106,8 +107,8 @@ public class GoToHumanAction extends Action {
 			ContextCreator.getGrid().moveTo(human, position.x, position.y);
 
 			positions.remove(0);
-			human.setX((int) position.x);
-			human.setY((int) position.y);
+			human.setX(position.x);
+			human.setY(position.y);
 		}
 		else {
 			this.duration = 0;

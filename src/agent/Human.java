@@ -6,6 +6,7 @@ import action.Action;
 import action.BuyFoodAction;
 import action.GoToHumanAction;
 import action.GoToPlaceAction;
+import action.ReproduceAction;
 import action.SleepAction;
 import action.WaitAction;
 import agent.place.House;
@@ -25,6 +26,7 @@ public class Human extends Agent{
 	private int gender; // 0 : male, 1 : female
 	private int maxAge;
 	private int age;
+	private int reproduceCount;
 
 	private int mood;
 	private int energy;
@@ -47,6 +49,7 @@ public class Human extends Agent{
 		this.gender = RandomHelper.nextIntFromTo(0, 1);
 		this.maxAge = RandomHelper.createNormal(75, 10).nextInt();
 		this.age 	= 0;
+		this.reproduceCount = 0;
 		
 		this.mood 		= Constants.average;
 		this.energy 	= Constants.average;
@@ -73,6 +76,7 @@ public class Human extends Agent{
 		this.gender = gender;
 		this.maxAge = RandomHelper.createNormal(75, 10).nextInt();
 		this.age 	= age;
+		this.reproduceCount = 0;
 		
 		this.mood 		= Constants.average;
 		this.energy 	= Constants.average;
@@ -164,8 +168,10 @@ public class Human extends Agent{
 		this.addEnergy(currentPlace.getEnergy());
 		this.addHunger(currentPlace.getHunger());
 
-		if (RunEnvironment.getInstance().getCurrentSchedule().getTickCount() % 52560 == 0)
-			age++;		
+		if (RunEnvironment.getInstance().getCurrentSchedule().getTickCount() % 52560 == 0) {
+			age++;
+			reproduceCount--;
+		}
 		currentAction.update();
 		
 		if (currentAction.getDuration() == 0)
@@ -181,14 +187,22 @@ public class Human extends Agent{
 		}
 
 		if (currentAction == null) {
-			// BEG: DEBUG
-			currentAction = new GoToPlaceAction(this, PlaceType.FIELD);
+			int minNeed = Math.min(mood, Math.min(energy, Math.min(hunger, (int) house.getMoney() / house.getInhabitants().size())));
+			if (age >= 25 && age < 35
+					&& reproduceCount <= 0 && minNeed > 40
+					&& house.getPartner(gender) != null
+					&& ReadMap.findEmptyHouses(gender).size() != 0)
+				currentAction = new ReproduceAction(this, house.getPartner(gender));
+			else if (mood == minNeed)
+				currentAction = goGetMood();
+			else if (energy == minNeed)
+				currentAction = goGetSleep();
+			else if (hunger == minNeed)
+				currentAction = goGetFood();
+			else if ((int) house.getMoney() / house.getInhabitants().size() == minNeed)
+				currentAction = job.getNextStep(this);
+			
 			currentAction.initiate();
-			if (currentAction.getDuration() == 0)
-				currentAction = new WaitAction(this);
-			// END: DEBUG
-			// TODO: Reproduire (Si partenaire a la maison, maisons disponibles pour le sexe, assez vieux),
-			// ou combler le besoin au minimum (mood, energy, food, money)
 		}
 		currentAction.step();
 	}
@@ -246,8 +260,7 @@ public class Human extends Agent{
 				newHouse.add(this);
 				this.house = newHouse;
 				newHouse.addMoney(budget);
-				WaitAction wait = new WaitAction(this);
-				return wait;
+				return new WaitAction(this);
 			}
 		}
 		// TODO: remove de la House avec une part de l'argent, transfert dans une autre maison disponible, acquiert un nouveau job

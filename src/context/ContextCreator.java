@@ -1,11 +1,5 @@
 package context;
 
-import repast.simphony.context.Context;
-import repast.simphony.dataLoader.ContextBuilder;
-import repast.simphony.space.grid.Grid;
-import repast.simphony.space.grid.GridPoint;
-import repast.simphony.util.ContextUtils;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -14,6 +8,9 @@ import agent.Agent;
 import agent.Human;
 import agent.place.Place;
 import job.JobType;
+import repast.simphony.context.Context;
+import repast.simphony.dataLoader.ContextBuilder;
+import repast.simphony.space.grid.Grid;
 
 /* TODO:
  * - generer la carte en fonction du fichier

@@ -1,10 +1,14 @@
 <repast.simphony.visualization.engine.CartesianDisplayDescriptor>
-  <name>first</name>
+  <name>second</name>
   <type>2D</type>
   <styles>
     <entry>
-      <string>agent.place.House</string>
+      <string>agent.Human</string>
       <string>repast.simphony.visualizationOGL2D.DefaultStyleOGL2D</string>
+    </entry>
+    <entry>
+      <string>agent.place.House</string>
+      <string>repast.simphony.visualization.editedStyle.EditedStyle2D</string>
     </entry>
     <entry>
       <string>job.Driver</string>
@@ -16,7 +20,7 @@
     </entry>
     <entry>
       <string>agent.place.School</string>
-      <string>repast.simphony.visualizationOGL2D.DefaultStyleOGL2D</string>
+      <string>repast.simphony.visualization.editedStyle.EditedStyle2D</string>
     </entry>
     <entry>
       <string>job.Student</string>
@@ -24,22 +28,22 @@
     </entry>
     <entry>
       <string>agent.place.Road</string>
-      <string>repast.simphony.visualizationOGL2D.DefaultStyleOGL2D</string>
+      <string>repast.simphony.visualization.editedStyle.EditedStyle2D</string>
     </entry>
     <entry>
       <string>agent.place.Place</string>
-      <string>repast.simphony.visualizationOGL2D.DefaultStyleOGL2D</string>
+      <string>repast.simphony.visualization.editedStyle.EditedStyle2D</string>
     </entry>
     <entry>
       <string>agent.place.Field</string>
+      <string>repast.simphony.visualization.editedStyle.EditedStyle2D</string>
+    </entry>
+    <entry>
+      <string>job.Banker</string>
       <string>repast.simphony.visualizationOGL2D.DefaultStyleOGL2D</string>
     </entry>
     <entry>
       <string>job.Seller</string>
-      <string>repast.simphony.visualizationOGL2D.DefaultStyleOGL2D</string>
-    </entry>
-    <entry>
-      <string>job.Banker</string>
       <string>repast.simphony.visualizationOGL2D.DefaultStyleOGL2D</string>
     </entry>
     <entry>
@@ -49,8 +53,12 @@
   </styles>
   <editedStyles>
     <entry>
-      <string>agent.place.House</string>
+      <string>agent.Human</string>
       <null/>
+    </entry>
+    <entry>
+      <string>agent.place.House</string>
+      <string>agent.place.House.style_5.xml</string>
     </entry>
     <entry>
       <string>job.Driver</string>
@@ -62,7 +70,7 @@
     </entry>
     <entry>
       <string>agent.place.School</string>
-      <null/>
+      <string>agent.place.School.style_1.xml</string>
     </entry>
     <entry>
       <string>job.Student</string>
@@ -70,22 +78,22 @@
     </entry>
     <entry>
       <string>agent.place.Road</string>
-      <null/>
+      <string>agent.place.Road.style_1.xml</string>
     </entry>
     <entry>
       <string>agent.place.Place</string>
-      <null/>
+      <string>agent.place.Place.style_2.xml</string>
     </entry>
     <entry>
       <string>agent.place.Field</string>
+      <string>agent.place.Field.style_6.xml</string>
+    </entry>
+    <entry>
+      <string>job.Banker</string>
       <null/>
     </entry>
     <entry>
       <string>job.Seller</string>
-      <null/>
-    </entry>
-    <entry>
-      <string>job.Banker</string>
       <null/>
     </entry>
     <entry>
@@ -103,31 +111,35 @@
     <pType>LAST</pType>
     <duration>-1.0</duration>
     <frequency>REPEAT</frequency>
-    <hashCode>-2142207367</hashCode>
+    <hashCode>220370864</hashCode>
   </schedParams>
   <layoutClassName>foo.bar.baz</layoutClassName>
   <layoutProjection>grid</layoutProjection>
   <layoutInterval>0</layoutInterval>
   <layerOrder>
     <entry>
+      <string>agent.Human</string>
+      <int>3</int>
+    </entry>
+    <entry>
       <string>agent.place.House</string>
-      <int>7</int>
+      <int>9</int>
     </entry>
     <entry>
       <string>job.Driver</string>
-      <int>1</int>
-    </entry>
-    <entry>
-      <string>job.Farmer</string>
-      <int>0</int>
-    </entry>
-    <entry>
-      <string>agent.place.School</string>
       <int>6</int>
     </entry>
     <entry>
+      <string>job.Farmer</string>
+      <int>5</int>
+    </entry>
+    <entry>
+      <string>agent.place.School</string>
+      <int>7</int>
+    </entry>
+    <entry>
       <string>job.Student</string>
-      <int>3</int>
+      <int>1</int>
     </entry>
     <entry>
       <string>agent.place.Road</string>
@@ -135,23 +147,23 @@
     </entry>
     <entry>
       <string>agent.place.Place</string>
-      <int>9</int>
+      <int>11</int>
     </entry>
     <entry>
       <string>agent.place.Field</string>
       <int>10</int>
     </entry>
     <entry>
-      <string>job.Seller</string>
-      <int>5</int>
-    </entry>
-    <entry>
       <string>job.Banker</string>
       <int>4</int>
     </entry>
     <entry>
-      <string>job.Teacher</string>
+      <string>job.Seller</string>
       <int>2</int>
+    </entry>
+    <entry>
+      <string>job.Teacher</string>
+      <int>0</int>
     </entry>
   </layerOrder>
   <projections>
@@ -193,9 +205,9 @@
   </projectionDescriptors>
   <props/>
   <backgroundColor>
-    <red>255</red>
-    <green>255</green>
-    <blue>255</blue>
+    <red>187</red>
+    <green>122</green>
+    <blue>54</blue>
     <alpha>255</alpha>
   </backgroundColor>
   <valueLayers/>

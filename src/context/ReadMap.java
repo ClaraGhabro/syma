@@ -67,8 +67,8 @@ public class ReadMap {
             br = new BufferedReader(new FileReader(this.path));
          
             sCurrentLine = br.readLine();
-            this.width = Integer.parseInt(sCurrentLine.split(" ")[0]);
-            this.height = Integer.parseInt(sCurrentLine.split(" ")[1]);
+            this.width = Integer.parseInt(sCurrentLine.split(" ")[1]);
+            this.height = Integer.parseInt(sCurrentLine.split(" ")[0]);
             System.out.println("height : " + height);
             System.out.println("width: " + width);
             int i = 0;
@@ -81,71 +81,71 @@ public class ReadMap {
             grid = gfac.createGrid("grid", context, gbp);
 
             
-            while ((sCurrentLine = br.readLine()) != null && i != width) {
+            while ((sCurrentLine = br.readLine()) != null && i != this.height) {
                 for (String mapElt : sCurrentLine.split(" ")) {
              //       System.out.println("mapElt: " + mapElt);
                 	
                     switch (mapElt) {
                         case "F": { // Forest
-                        	Place forest = new Place(i, j, grid, PlaceType.FOREST, 0, 0, 0);
+                        	Place forest = new Place(j, i, grid, PlaceType.FOREST, 0, 0, 0);
                         	place.add(forest);
                         	context.add(forest);
-                        	grid.moveTo(forest, i, j);
+                        	grid.moveTo(forest, j, i);
                         	break; 
                         }
                         case "f": { // Field 
-                        	Field field = new Field(i, j, grid, 0, 0, 0);
+                        	Field field = new Field(j, i, grid, 0, 0, 0);
                         	place.add(field);
                         	context.add(field);
-                        	grid.moveTo(field, i, j);
+                        	grid.moveTo(field, j, i);
                         	break;
                         }
                         case "W": { // Water
-                        	Place water = new Place(i, j, grid, PlaceType.WATER, 0, 0, 0);
+                        	Place water = new Place(j, i, grid, PlaceType.WATER, 0, 0, 0);
                         	place.add(water);
                         	context.add(water);
-                        	grid.moveTo(water,  i, j);
+                        	grid.moveTo(water,  j, i);
                         	break; 
                         }
                         case "H": { // House 
                         	nbHouse++;
-                        	House house = new House(i, j, grid, 0, 0, 0);
+                        	House house = new House(j, i, grid, 0, 0, 0);
                         	place.add(house);
                         	context.add(house);
-                        	grid.moveTo(house, i, j);
+                        	grid.moveTo(house, j, i);
                         	break;
                         }
                         case "R": { // Road
-                        	Place road = new Road(i, j, grid, 0, 0, 0);
+                        	Place road = new Road(j, i, grid, 0, 0, 0);
                         	place.add(road);
                         	context.add(road);
-                        	grid.moveTo(road,  i, j);
+                        	grid.moveTo(road,  j, i);
                         	break;
                         }
                         case "L": { // Land
-                        	Place land = new Place(i, j, grid, PlaceType.LAND, 0, 0, 0);
+                        	Place land = new Place(j, i, grid, PlaceType.LAND, 0, 0, 0);
                         	place.add(land);
                         	context.add(land);
-                        	grid.moveTo(land,  i, j);
+                        	grid.moveTo(land,  j, i);
                         	break; }
                         case "C": { // Concrete
-                        	Place concrete = new Place(i, j, grid, PlaceType.CONCRETE, 0, 0, 0);
+                        	Place concrete = new Place(j, i, grid, PlaceType.CONCRETE, 0, 0, 0);
                         	place.add(concrete);
                         	context.add(concrete);
-                        	grid.moveTo(concrete,  i, j);
+                        	grid.moveTo(concrete,  j, i);
                         	break; }
                         case "S" : { // School
-                        	Place school = new School(i, j, grid, 0, 0, 0);
+                        	Place school = new School(j, i, grid, 0, 0, 0);
                         	place.add(school);
                         	context.add(school);
-                        	grid.moveTo(school,  i, j);
+                        	grid.moveTo(school,  j, i);
                         	break;
                         }
                         case "P" : { // Park
-                        	Place park = new Place(i, j, grid, PlaceType.PARK, 0, 0, 0);
+                        	Place park = new Place(j, i, grid, PlaceType.PARK, 0, 0, 0);
                         	place.add(park);
                         	context.add(park);
-                        	grid.moveTo(park,  i, j);
+                        	grid.moveTo(park,  j, i);
                         	break;
                         }
                     }
@@ -154,7 +154,7 @@ public class ReadMap {
                 System.out.println(sCurrentLine);
                 i++;
             }
-//            System.out.println("nb de House : " + nbHouse);
+            System.out.println("nb de House : " + nbHouse);
 
 
             for (int r = 0; r < 2; ++r) {
@@ -247,7 +247,7 @@ public class ReadMap {
 		for (int i = 0; i < this.place.size(); ++i) {
 			if (this.place.get(i) instanceof House) {
 				
-				System.out.println("cest une house");
+	//			System.out.println("cest une house");
 				if (position == 0) {
 		//			System.out.println("c'est laaaaaa maisons");
 					return (House) this.place.get(i);

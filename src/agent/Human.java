@@ -163,7 +163,7 @@ public class Human extends Agent{
 		// TODO: si dans un parc, WaitAction, sinon GoToPlaceAction => Parc
 		Place place = ContextCreator.getPlaceAt(this.x, this.y);
 		if (place.getType() == PlaceType.PARK) {
-			WaitAction wait = new WaitAction(this);
+			WaitAction wait = new WaitAction(this, 1);
 			wait.initiate();
 			return wait;
 		}
@@ -218,13 +218,13 @@ public class Human extends Agent{
 			if (newHouse.getInhabitants().isEmpty() 
 					|| inhabitant.size() == 1 && inhabitant.get(0).gender != this.gender) {
 				newHouse.add(this);
-				WaitAction wait = new WaitAction(this);
+				WaitAction wait = new WaitAction(this, 1);
 				wait.initiate();
 				return wait;
 			}
 		}
 		// TODO: remove de la House avec une part de l'argent, transfert dans une autre maison disponible, acquiert un nouveau job
-		WaitAction wait = new WaitAction(this);
+		WaitAction wait = new WaitAction(this, 1);
 		wait.initiate();
 		return wait;
 	}

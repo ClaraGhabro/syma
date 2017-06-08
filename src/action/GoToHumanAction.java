@@ -3,14 +3,13 @@ package action;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import com.sun.javafx.geom.Point2D;
-
 import agent.Agent;
 import agent.Human;
 import agent.place.Place;
 import context.ContextCreator;
 import job.JobType;
 import repast.simphony.space.grid.Grid;
+import util.Point2D;
 
 public class GoToHumanAction extends Action {
 	private JobType jobType;
@@ -90,7 +89,7 @@ public class GoToHumanAction extends Action {
 			Point2D pos = new Point2D(x, y);
 			while (! (pos.x == origin.x) || ! (pos.y == origin.y)) {
 				this.positions.add(pos);
-				pos = predecessors[(int) pos.x][(int) pos.y];
+				pos = predecessors[pos.x][pos.y];
 			}
 			Collections.reverse(this.positions);
 		}
@@ -102,8 +101,8 @@ public class GoToHumanAction extends Action {
 	public void step() {
 		Point2D position = positions.get(0);
 
-		if (ContextCreator.getPlaceAt((int) position.x, (int) position.y).isAccessibleTo(human)) {
-			ContextCreator.getGrid().moveTo(human, (int) position.x, (int) position.y);
+		if (ContextCreator.getPlaceAt(position.x, position.y).isAccessibleTo(human)) {
+			ContextCreator.getGrid().moveTo(human, position.x, position.y);
 
 			positions.remove(0);
 			human.setX((int) position.x);

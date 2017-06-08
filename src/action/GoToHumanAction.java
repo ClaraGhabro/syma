@@ -14,6 +14,7 @@ public class GoToHumanAction extends Action {
 		super(human);
 		this.destHuman = null;
 		this.jobType = jobType;
+		this.type = new String("Is meeting " + destHuman.getName());
 	}
 
 	@Override
@@ -23,6 +24,6 @@ public class GoToHumanAction extends Action {
 
 	@Override
 	public void step() {
-		// TODO: Avancer jusqu'à l'humain
+		// TODO: Avancer jusqu'ï¿½ l'humain
 	}
 }

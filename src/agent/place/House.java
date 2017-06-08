@@ -7,7 +7,7 @@ import agent.Human;
 import repast.simphony.space.grid.Grid;
 
 public class House extends Place {
-	private int money;
+	private double money;
 	private ArrayList<Human> inhabitants;
 
 	public House(int i, int j, Grid<Agent> grid, int mood, int energy, int hunger) {
@@ -15,11 +15,11 @@ public class House extends Place {
 		this.inhabitants = new ArrayList<>();
 	}
 
-	public int getMoney() {
+	public double getMoney() {
 		return this.money;
 	}
 
-	public void addMoney(int money) {
+	public void addMoney(double money) {
 		this.money += money;
 	}
 
@@ -36,24 +36,23 @@ public class House extends Place {
 
 	public void add(Human human) {
 		inhabitants.add(human);
-		human.addHouse(this);
 	}
 	
 	public ArrayList<Human> getInhabitants() {
 		return this.inhabitants;
 	}
 	
-	public int remove(Human human) {
+	public double remove(Human human) {
 		int nbInhab = inhabitants.size();
 		
 		if (inhabitants.contains(human)) {
 			inhabitants.remove(human);
-			int result = money / nbInhab;
+			double result = money / nbInhab;
 			this.money = (nbInhab - 1) * money;
 			return result;
 		}
 		else {
-			return 0;
+			return 0.;
 		}
 	}
 }

@@ -1,20 +1,22 @@
 package action;
 
 import agent.Human;
+import context.Constants;
 
 public class TradeAction extends Action {
 
 	public TradeAction(Human human) {
 		super(human);
+		this.type = new String("Is trading");
 	}
 
 	@Override
 	public void initiate() {
-		// TODO: Calculer la durée
+		this.duration = Constants.tradeDuration;
 	}
 
 	@Override
 	public void step() {
-		// TODO: Augmente l'argent en fonction de l'éducation	
+		this.human.getHouse().addMoney(human.getEducation() / 10);
 	}
 }

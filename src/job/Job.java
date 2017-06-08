@@ -13,5 +13,4 @@ public abstract class Job {
 	public JobType getJobType() {
 		return this.jobType;
 	}
-
 }

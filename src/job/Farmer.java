@@ -1,7 +1,12 @@
 package job;
 
 import action.Action;
+import action.GoToPlaceAction;
+import action.HarvestAction;
 import agent.Human;
+import agent.place.PlaceType;
+import agent.place.Field;
+import context.ContextCreator;
 
 public class Farmer extends Job {
 	public Farmer() {
@@ -10,7 +15,8 @@ public class Farmer extends Job {
 
 	@Override
 	public Action getNextStep(Human human) {
-		// TODO: Si au field, HARVEST, sinon aller au plus proche FIELD � pied ou en driver si plus int�ressant
-		return null;
+		if (ContextCreator.getPlaceAt(human.getX(), human.getY()).getType() == PlaceType.FIELD)
+			return new HarvestAction(human, (Field)ContextCreator.getPlaceAt(human.getX(), human.getY()));
+		return new GoToPlaceAction(human, PlaceType.FIELD);
 	}
 }

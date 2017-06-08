@@ -16,7 +16,7 @@ public class HarvestAction extends Action {
 
 	@Override
 	public void step() {
-		human.addHunger(field.getAge());
-		field.setAge(human.getEducation());
+		human.addQuantity(field.getAge());
+		field.setAge(Math.min(field.getMinAge() - 3, human.getEducation()));
 	}
 }

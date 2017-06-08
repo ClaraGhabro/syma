@@ -15,7 +15,7 @@ public class Field extends Place {
 		super(i, j, grid, PlaceType.FIELD, mood, energy, hunger);
 		this.age = 0;
 		this.maxAge = RandomHelper.createNormal(30, 5).nextInt();
-		this.minAge = RandomHelper.createNormal(10, 3).nextInt();
+		this.minAge = RandomHelper.createNormal(15, 2).nextInt();
 	}
 
 	public void setMaxAge(int age) {
@@ -32,6 +32,10 @@ public class Field extends Place {
 
 	public int getAge() {
 		return age;
+	}
+	
+	public int getMinAge() {
+		return minAge;
 	}
 	
 	@Override

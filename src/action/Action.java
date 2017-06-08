@@ -5,6 +5,7 @@ import agent.Human;
 public abstract class Action {
 	protected Human human;
 	protected int duration;
+	protected String type;
 	
 	public Action(Human human) {
 		this.human = human;

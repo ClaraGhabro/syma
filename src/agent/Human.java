@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import action.Action;
 import action.GoToPlaceAction;
 import agent.place.House;
+import agent.place.Place;
 import agent.place.PlaceType;
+import context.ContextCreator;
 import job.Job;
 import job.Student;
 import repast.simphony.random.RandomHelper;
@@ -59,7 +61,9 @@ public class Human extends Agent{
 		this.gender = gender;
 		this.maxAge = RandomHelper.createNormal(75, 10).nextInt();
 		this.age 	= age;
-
+		System.out.println(age);
+		System.out.println(maxAge);
+		
 		this.mood 		= 50;
 		this.energy 	= 50;
 		this.hunger 	= 50;
@@ -120,7 +124,10 @@ public class Human extends Agent{
 
 	@Override
 	public void update() {
-		// TODO: Interagir avec le terrain pour mettre � jour mood, energy, hunger, education
+		Place currentPlace = ContextCreator.getPlaceAt(x, y);
+		this.addMood(currentPlace.getMood());
+		this.addEnergy(currentPlace.getEnergy());
+		this.addHunger(currentPlace.getHunger());
 		
 		age++;		
 		currentAction.update();

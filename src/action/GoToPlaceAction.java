@@ -40,17 +40,19 @@ public class GoToPlaceAction extends Action {
 		int x = human.getX();
 		int y = human.getY();
 		
-		// DEBUG
-		System.out.println(x);
-		System.out.println(y);
-		
 		distances[x][y] = 0;
 		Place currentPlace = ContextCreator.getPlaceAt(x, y);
 		int dxs[] = {0, 0, -1, 1};
 		int dys[] = {-1, 1, 0, 0};
+
+		for (int dx: dxs)
+			System.out.println(dx);
+		
 		while (successors.size() != 0 && currentPlace.getType() != type) {
 			for (int dx: dxs) {
+				System.out.println(dx);
 				for (int dy: dys) {
+					System.out.println(dy);
 					Place neighbour = ContextCreator.getPlaceAt(x + dx, y + dy);
 					if (neighbour != null) {
 						int distance = distances[x][y] + 100 / Integer.min(Integer.min(	human.getMood() / neighbour.getMood(),
@@ -99,6 +101,16 @@ public class GoToPlaceAction extends Action {
 	@Override
 	public void step() {
 		Point2D position = positions.get(0);
+
+		// DEBUG
+		System.out.println(positions.size());
+		System.out.println(positions);
+		System.out.println("Go to");
+		System.out.println(position);
+		System.out.println("From");
+		System.out.println(new Point2D(human.getX(), human.getY()));
+		System.out.println(" ");
+
 		if (ContextCreator.getPlaceAt((int) position.x, (int) position.y).isAccessibleTo(human)) {
 			ContextCreator.getGrid().moveTo(human, (int) positions.get(0).x, (int) positions.get(0).y);
 			positions.remove(0);

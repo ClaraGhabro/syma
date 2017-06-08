@@ -49,19 +49,4 @@ public abstract class Agent {
 		context.remove(this);
 		System.err.println("DIE");
 	}
-
-	/*
-	protected void move() {
-		Uniform u = RandomHelper.createUniform();
-		double xx = u.nextDouble();
-		double yy = u.nextDouble();
-		int x2 = (int) Math.round((xx * 2) - 1);
-		int y2= (int) Math.round((yy * 2) - 1);
-		 x += x2;
-		 y += y2;
-		 
-		 grid.moveTo(this, x, y);
-		}
-	}
-	*/
 }

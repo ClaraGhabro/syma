@@ -62,7 +62,6 @@ public class ReadMap {
             fr = new FileReader(this.path);
             br = new BufferedReader(fr);
 
-
             String sCurrentLine;
 
             br = new BufferedReader(new FileReader(this.path));
@@ -78,7 +77,7 @@ public class ReadMap {
             
             GridFactory gfac = GridFactoryFinder.createGridFactory(null);
     		GridBuilderParameters<Agent> gbp = new GridBuilderParameters<Agent>(new WrapAroundBorders(), 
-    				new SimpleGridAdder<Agent>(), false, this.width, this.height);
+    				new SimpleGridAdder<Agent>(), true, this.width, this.height);
             grid = gfac.createGrid("grid", context, gbp);
 
             

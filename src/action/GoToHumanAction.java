@@ -94,7 +94,7 @@ public class GoToHumanAction extends Action {
 			}
 			Collections.reverse(this.positions);
 		}
-		
+
 		this.duration = positions.size();
 	}
 

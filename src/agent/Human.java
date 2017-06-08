@@ -72,8 +72,6 @@ public class Human extends Agent{
 		this.gender = gender;
 		this.maxAge = RandomHelper.createNormal(75, 10).nextInt();
 		this.age 	= age;
-		System.out.println(age);
-		System.out.println(maxAge);
 		
 		this.mood 		= Constants.average;
 		this.energy 	= Constants.average;
@@ -177,20 +175,28 @@ public class Human extends Agent{
 		if (mood <= 0 || energy <= 0 || hunger <= 0 || age > maxAge) {
 			die();
 			house.remove(this);
+			return;
 		}
-		
+
 		if (currentAction == null) {
-			// DEBUG:
-			currentAction = new WaitAction(this);
+			// BEG: DEBUG
+			currentAction = new GoToPlaceAction(this, PlaceType.FIELD);
+			currentAction.initiate();
+			if (currentAction.getDuration() == 0) {
+				System.out.println("WAIT");
+				currentAction = new WaitAction(this);
+			}
+			else {
+				System.out.println("GOING");
+			}
+			// END: DEBUG
 			// TODO: Reproduire (Si partenaire a la maison, maisons disponibles pour le sexe, assez vieux),
 			// ou combler le besoin au minimum (mood, energy, food, money)
-			currentAction.initiate();
 		}
 		currentAction.step();
 	}
 	
 	public Action goGetMood() {
-		// TODO: si dans un parc, WaitAction, sinon GoToPlaceAction => Parc
 		Place place = ContextCreator.getPlaceAt(this.x, this.y);
 		if (place.getType() == PlaceType.PARK) {
 			WaitAction wait = new WaitAction(this);
@@ -221,7 +227,7 @@ public class Human extends Agent{
 			if (someone.x == this.x && someone.y == this.y){
 				BuyFoodAction buy = new BuyFoodAction(this, someone);
 				return buy;
-			}		
+			}
 		}
 		
 		GoToHumanAction goHuman = new GoToHumanAction(this, JobType.SELLER);
@@ -241,6 +247,7 @@ public class Human extends Agent{
 			if (newHouse.getInhabitants().isEmpty() 
 					|| inhabitant.size() == 1 && inhabitant.get(0).gender != this.gender) {
 				newHouse.add(this);
+				this.house = newHouse;
 				newHouse.addMoney(budget);
 				WaitAction wait = new WaitAction(this);
 				return wait;

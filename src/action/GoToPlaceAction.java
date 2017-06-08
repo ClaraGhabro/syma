@@ -25,6 +25,7 @@ public class GoToPlaceAction extends Action {
 	@Override
 	public void initiate() {
 		Grid<Agent> grid = ContextCreator.getGrid();
+		this.positions = new ArrayList<>();
 		
 		int width = grid.getDimensions().getWidth();
 		int height = grid.getDimensions().getHeight();
@@ -53,9 +54,9 @@ public class GoToPlaceAction extends Action {
 				int dy = dys[i];
 				Place neighbour = ContextCreator.getPlaceAt(x + dx, y + dy);
 				if (neighbour != null && neighbour.isAccessibleTo(human)) {
-					int distance = distances[x][y] + 100 / Integer.min(Integer.min(	human.getMood() / neighbour.getMood(),
-																					human.getEnergy() / neighbour.getEnergy()),
-																					human.getHunger() / neighbour.getHunger());
+					int distance = distances[x][y] + 100 / Integer.min(Integer.min(	human.getMood() 	/ neighbour.getMood(),
+																					human.getEnergy() 	/ neighbour.getEnergy()),
+																					human.getHunger() 	/ neighbour.getHunger());
 					if (x + dx >= 0 && x + dx < width
 							&& y + dy >= 0 && y + dy < height
 							&& distance < distances[x + dx][y + dy]) {
@@ -93,8 +94,8 @@ public class GoToPlaceAction extends Action {
 			}
 			Collections.reverse(this.positions);
 		}
-		
 		this.duration = positions.size();
+		System.out.println(positions);
 	}
 
 	@Override
@@ -109,6 +110,7 @@ public class GoToPlaceAction extends Action {
 			human.setY(position.y);
 		}
 		else {
+			System.out.println("ELSE");
 			this.duration = 0;
 			this.positions = new ArrayList<>();
 		}

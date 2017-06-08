@@ -33,11 +33,11 @@ public class Field extends Place {
 	public int getAge() {
 		return age;
 	}
-	
+
 	public int getMinAge() {
 		return minAge;
 	}
-	
+
 	@Override
 	public PlaceType getType() {
 		return age > minAge ? PlaceType.FIELD: PlaceType.LAND;

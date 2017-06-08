@@ -3,8 +3,14 @@ package agent;
 import java.util.ArrayList;
 
 import action.Action;
+import action.GoToPlaceAction;
 import agent.place.House;
+import agent.place.Place;
+import agent.place.PlaceType;
+import context.ContextCreator;
 import job.Job;
+import job.Student;
+import repast.simphony.random.RandomHelper;
 import repast.simphony.space.grid.Grid;
 
 public class Human extends Agent{
@@ -25,15 +31,51 @@ public class Human extends Agent{
 	private Job job;
 	private House house;
 
-	public Human(int i, int j, Grid<Agent> grid) {
+	public Human(int i, int j, Grid<Agent> grid, Human father, Human mother) {
 		super(i, j, grid);
+		
+		this.gender = RandomHelper.nextIntFromTo(0, 1);
+		this.maxAge = RandomHelper.createNormal(75, 10).nextInt();
+		this.age 	= 0;
+		
+		this.mood 		= 50;
+		this.energy 	= 50;
+		this.hunger 	= 50;
+		this.education 	= 0;
+		
+		this.parents 	= new ArrayList<>();
+		this.siblings 	= new ArrayList<>();
+		this.children 	= new ArrayList<>();
+		
+		this.parents.add(father);
+		this.parents.add(mother);
+		this.siblings.addAll(father.children); // TODO: le father instancie l'enfant puis l'ajoute lors de la reproduction à ses children.
+		
+		this.currentAction 	= null;
+		this.job 			= new Student();
+		father.house.add(this);
 	}
 	
 	public Human(int i, int j, Grid<Agent> grid, int gender, int age, Job job) {
 		super(i, j, grid);
 		this.gender = gender;
-		this.age = age;
-		this.job = job;
+		this.maxAge = RandomHelper.createNormal(75, 10).nextInt();
+		this.age 	= age;
+		System.out.println(age);
+		System.out.println(maxAge);
+		
+		this.mood 		= 50;
+		this.energy 	= 50;
+		this.hunger 	= 50;
+		this.education 	= 50;
+
+		this.parents 	= new ArrayList<>();
+		this.siblings 	= new ArrayList<>();
+		this.children 	= new ArrayList<>();
+
+		this.currentAction 	= null;
+		this.job 			= job;
+		this.house 			= null;
 	}
 
 	public void addMood(int mood) {
@@ -48,6 +90,10 @@ public class Human extends Agent{
 	public void addEducation(int education) {
 		this.education += education;
 	}
+	public void addHouse(House house) {
+		this.house = house;
+	}
+
 	public int getMood() {
 		return mood;
 	}
@@ -56,6 +102,15 @@ public class Human extends Agent{
 	}
 	public int getHunger() {
 		return hunger;
+	}
+	public ArrayList<Human> getParents() {
+		return this.parents;
+	}
+	public ArrayList<Human> getSiblings() {
+		return this.siblings;
+	}
+	public ArrayList<Human> getChildren() {
+		return this.children;
 	}
 	public int getEducation() {
 		return education;
@@ -69,7 +124,10 @@ public class Human extends Agent{
 
 	@Override
 	public void update() {
-		// TODO: Interagir avec le terrain pour mettre ï¿½ jour mood, energy, hunger, education
+		Place currentPlace = ContextCreator.getPlaceAt(x, y);
+		this.addMood(currentPlace.getMood());
+		this.addEnergy(currentPlace.getEnergy());
+		this.addHunger(currentPlace.getHunger());
 		
 		age++;		
 		currentAction.update();
@@ -86,6 +144,8 @@ public class Human extends Agent{
 		}
 		
 		if (currentAction == null) {
+			// DEBUG:
+			currentAction = new GoToPlaceAction(this, PlaceType.FIELD);
 			// TODO: Reproduire (Si partenaire ï¿½ la maison, maisons disponibles pour le sexe, assez vieux), ou combler le besoin au minimum (mood, energy, food, money)
 			currentAction.initiate();
 		}

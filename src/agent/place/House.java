@@ -36,6 +36,7 @@ public class House extends Place {
 
 	public void add(Human human) {
 		inhabitants.add(human);
+		human.addHouse(this);
 	}
 	
 	public ArrayList<Human> getInhabitants() {

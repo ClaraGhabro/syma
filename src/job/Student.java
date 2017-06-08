@@ -2,7 +2,7 @@ package job;
 
 import action.Action;
 import action.GoToPlaceAction;
-import action.LearnAction;
+import action.WaitAction;
 import agent.Human;
 import agent.place.PlaceType;
 import context.Constants;
@@ -16,7 +16,7 @@ public class Student extends Job {
 	@Override
 	public Action getNextStep(Human human) {
 		if (ContextCreator.getPlaceAt(human.getX(), human.getY()).getType() == PlaceType.SCHOOL)
-			return new LearnAction(human);
+			return new WaitAction(human, Constants.schoolDuration);
 		return new GoToPlaceAction(human, PlaceType.SCHOOL);
 	}
 }

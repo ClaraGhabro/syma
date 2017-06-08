@@ -17,22 +17,33 @@ public class ReproduceAction extends Action {
 	}
 	
 	@Override
-	public void initiate() {}
+	public void initiate() {
+		this.duration = Constants.gestationCount;
+	}
 
 	public void addRandomHuman(int x, int y) {
 		Context<Agent> context = ContextUtils.getContext(this);
 		Human baby = new Human(x, y, ContextCreator.getGrid(), human, huwoman);
 		context.add(baby);
 		ContextCreator.getGrid().moveTo(baby, x, y);
+		
+		baby.getParents().add(human);
+		baby.getParents().add(huwoman);
+		
 		this.human.getChildren().add(baby);
 		this.huwoman.getChildren().add(baby);
+
+		for (Human sibling: human.getChildren())
+			sibling.getSiblings().add(baby);
+		for (Human sibling: huwoman.getChildren())
+			sibling.getSiblings().add(baby);
 	}
 	
 	@Override
 	public void step() {
 		if (this.duration == 1)
 		{
-			addRandomHuman(human.getX(), human.getY());
+			addRandomHuman(human.getHouse().getX(), human.getHouse().getY());
 			this.human.addEnergy(Constants.reproducingEnergy);
 			this.huwoman.addEnergy(Constants.reproducingEnergy);
 

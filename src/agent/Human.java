@@ -6,6 +6,7 @@ import action.Action;
 import action.BuyFoodAction;
 import action.GoToHumanAction;
 import action.GoToPlaceAction;
+import action.RelaxAction;
 import action.ReproduceAction;
 import action.SleepAction;
 import action.WaitAction;
@@ -32,7 +33,6 @@ public class Human extends Agent{
 	private int energy;
 	private int hunger;
 	private int education;
-	private int foodQuantity;
 	private String name;
 
 	private ArrayList<Human> parents;
@@ -55,7 +55,6 @@ public class Human extends Agent{
 		this.energy 	= Constants.average;
 		this.hunger 	= Constants.average;
 		this.education 	= 0;
-		this.foodQuantity = 0;
 		
 		this.parents 	= new ArrayList<>();
 		this.siblings 	= new ArrayList<>();
@@ -81,8 +80,7 @@ public class Human extends Agent{
 		this.mood 		= Constants.average;
 		this.energy 	= Constants.average;
 		this.hunger 	= Constants.average;
-		this.education 	= Constants.average;
-		this.foodQuantity = 0;
+		this.education 	= 10;
 
 
 		this.parents 	= new ArrayList<>();
@@ -153,16 +151,6 @@ public class Human extends Agent{
 	public void resetAction() {
 		this.currentAction = null;
 	}
-	public double getPrice() {
-		return education / 10 + 0.1;
-	}
-	public int getFoodQuantity() {
-		return foodQuantity;
-	}
-	public void addQuantity(int quantity) {
-		foodQuantity += quantity;
-	}
-
 
 	@Override
 	public void update() {
@@ -222,7 +210,7 @@ public class Human extends Agent{
 	public Action goGetMood() {
 		Place place = ContextCreator.getPlaceAt(this.x, this.y);
 		if (place.getType() == PlaceType.PARK) {
-			WaitAction wait = new WaitAction(this);
+			RelaxAction wait = new RelaxAction(this);
 			return wait;
 		}
 		return new GoToPlaceAction(this, PlaceType.PARK);
@@ -272,11 +260,10 @@ public class Human extends Agent{
 				newHouse.add(this);
 				this.house = newHouse;
 				newHouse.addMoney(budget);
-				return new WaitAction(this);
+				return new WaitAction(this, 1);
 			}
 		}
-		// TODO: remove de la House avec une part de l'argent, transfert dans une autre maison disponible, acquiert un nouveau job
-		WaitAction wait = new WaitAction(this);
+		WaitAction wait = new WaitAction(this, 1);
 		return wait;
 	}
 }

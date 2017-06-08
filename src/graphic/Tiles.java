@@ -7,11 +7,10 @@ import agent.place.Field;
 import agent.place.House;
 import agent.place.Place;
 import agent.place.PlaceType;
+import agent.place.Road;
 import agent.place.School;
 import context.ContextCreator;
 import job.JobType;
-
-import agent.place.Road;
 import repast.simphony.visualizationOGL2D.DefaultStyleOGL2D;
 import saf.v3d.scene.VSpatial;
 

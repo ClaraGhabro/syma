@@ -1,5 +1,7 @@
 package action;
 
+import java.util.ArrayList;
+
 import agent.Human;
 import context.Constants;
 import context.ContextCreator;
@@ -17,13 +19,14 @@ public class TeachAction extends Action {
 		this.duration = Constants.schoolDuration;
 	}
 	
-	public int getNbStudents() {
-		return ContextCreator.getHumansWithJobAt(human.getX(), human.getY(), JobType.STUDENT).size();
-	}
-
 	@Override
 	public void step() {
-		int nbStudents = getNbStudents();
-		this.human.getHouse().addMoney(Constants.schoolPrice * nbStudents);
+		ArrayList<Human> students = ContextCreator.getHumansWithJobAt(human.getX(), human.getY(), JobType.STUDENT);
+		
+		for (Human student: students) {
+			human.getHouse().addMoney(Constants.schoolPrice);
+			student.getHouse().addMoney(-Constants.schoolPrice);
+			student.addEducation(human.getEducation() / 10);
+		}
 	}
 }

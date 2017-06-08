@@ -4,9 +4,9 @@ import agent.Human;
 
 public class WaitAction extends Action {
 
-	public WaitAction(Human human) {
+	public WaitAction(Human human, int duration) {
 		super(human);
-		this.duration = 1;
+		this.duration = duration;
 		this.type = new String("Is waiting");
 	}
 

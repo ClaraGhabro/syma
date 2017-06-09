@@ -209,7 +209,7 @@ public class Human extends Agent{
 			int minNeedReproduce = Math.min(mood, Math.min(energy, hunger));
 			System.out.println("Reproduce ? " + minNeedReproduce);
 			if (age >= 25 && age < 50
-					&& reproduceCount <= 0 && minNeedReproduce > 40
+					&& reproduceCount <= 0 && minNeedReproduce > 30
 					&& house.getPartner(gender) != null
 					&& ReadMap.findEmptyHouses(gender).size() != 0
 					&& gender == 1) {

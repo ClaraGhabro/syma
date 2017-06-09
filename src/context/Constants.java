@@ -15,15 +15,15 @@ public class Constants {
 	// Others
 	public final static int average = 50;
 	public final static int maxAge = 20;
-	public final static int hungerPerUnit = 3;
+	public final static int hungerPerUnit = 6;
 	public final static int sleepEnergy = 10;
 	public final static int minimumFood = 30;
 	public final static int minimumHunger = 10;
 	public final static int foodHunger = 10;
 	public final static int moodHappy = 10;
-	public final static int maxMoodHappy = 80;
-	public final static int maxSleepHappy = 80;
-	public final static int maxFoodHappy = 80;
+	public final static int maxMoodHappy = 70;
+	public final static int maxSleepHappy = 70;
+	public final static int maxFoodHappy = 70;
 	public final static int reproducingEnergy = -10;
 	public final static int reproduceCount = 3;
 	

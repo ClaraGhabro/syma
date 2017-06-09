@@ -15,7 +15,7 @@ public class Student extends Job {
 
 	@Override
 	public Action getNextStep(Human human) {
-		if (human.getAge() > Constants.maxAge)
+		if (human.getAge() >= Constants.maxAge)
 			return human.goGetAdulthood();
 		if (ContextCreator.getPlaceAt(human.getX(), human.getY()).getType() == PlaceType.SCHOOL)
 			return new WaitAction(human, Constants.schoolDuration);

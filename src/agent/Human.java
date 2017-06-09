@@ -11,7 +11,6 @@ import action.RelaxAction;
 import action.ReproduceAction;
 import action.SleepAction;
 import action.WaitAction;
-import agent.place.Field;
 import agent.place.House;
 import agent.place.Place;
 import agent.place.PlaceType;
@@ -91,10 +90,10 @@ public class Human extends Agent{
 		this.parents.add(mother);
 		this.siblings.addAll(father.children);
 		
-		this.currentAction 	= null;
 		this.job 			= new Student();
 		father.house.add(this);
 		this.name = ContextCreator.getRandomName(gender);
+		this.currentAction = new WaitAction(this, 1);
 	}
 	
 	public Human(int i, int j, Grid<Agent> grid, int gender, int age, Job job) {
@@ -114,7 +113,6 @@ public class Human extends Agent{
 		this.siblings 	= new ArrayList<>();
 		this.children 	= new ArrayList<>();
 
-		this.currentAction 	= null;
 		this.job 			= job;
 		this.house 			= null;
 		this.name = ContextCreator.getRandomName(gender);
@@ -210,7 +208,7 @@ public class Human extends Agent{
 			int minNeed = Math.min(mood - 20, Math.min(energy - 20, Math.min(hunger - 20, Math.min(house.getFood() - 10, (int) house.getMoney() / house.getInhabitants().size()))));
 			int minNeedReproduce = Math.min(mood, Math.min(energy, hunger));
 			System.out.println("Reproduce ? " + minNeedReproduce);
-			if (age >= 25 && age < 35
+			if (age >= 25 && age < 50
 					&& reproduceCount <= 0 && minNeedReproduce > 40
 					&& house.getPartner(gender) != null
 					&& ReadMap.findEmptyHouses(gender).size() != 0

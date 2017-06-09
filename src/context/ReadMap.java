@@ -48,8 +48,8 @@ public class ReadMap {
 	public static ArrayList<Place> place = new ArrayList<Place>();
 	
 	public ReadMap() {
-		this.path = "tests/carte.txt";
-		//this.path = "tests/carte_02.txt";
+		//this.path = "tests/carte.txt";
+		this.path = "tests/carte_03.txt";
 		//this.path = "tests/carte_01.txt";
 	}
 	

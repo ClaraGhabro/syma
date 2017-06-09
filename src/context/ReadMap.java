@@ -49,8 +49,8 @@ public class ReadMap {
 	
 	public ReadMap() {
 		//this.path = "tests/carte.txt";
-		this.path = "tests/carte_02.txt";
-		//this.path = "tests/carte_01.txt";
+		//this.path = "tests/carte_02.txt";
+		this.path = "tests/carte_01.txt";
 
 	}
 	
@@ -178,7 +178,7 @@ public class ReadMap {
                 String[] agentStat = sCurrentLine.split(" ");
                 switch (agentStat[0]) {
             		case "BANKER"  : { this.bankerProb = Float.valueOf(agentStat[1]); break; }
-            		case "DRIVER"  : { this.driverProb = Float.valueOf(agentStat[1]); break; }
+       //     		case "DRIVER"  : { this.driverProb = Float.valueOf(agentStat[1]); break; }
             		case "FARMER"  : { this.farmerProb = Float.valueOf(agentStat[1]); break; }
             		case "SELLER"  : { this.sellerProb = Float.valueOf(agentStat[1]); break; }
             		case "TEACHER" : { this.teacherProb = Float.valueOf(agentStat[1]); break; }

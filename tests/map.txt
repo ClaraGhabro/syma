@@ -6,23 +6,23 @@ F F F F F F F F W W W W W W W L L L f f f f f f f f f f f f f C C f f f f f f f 
 F F F F F F F F F W W W W W L L L L f f f f f f f f f f f f f C C f f f f f f f f f f f f f F F F F
 F F F F F F L L L L W W L L L L L L f f f f f f f f f f f f f C C f f f f f f f f f f f f f F F F F
 F F F F C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C F
-F F C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C F
-F C C C C C S C C H H H H H H H H C C H H H H H H H H H C L L L L L L L L S C C L L L L L L L C C F
+F F C C C C C C C C C C C C C C C C C C P P C C C C C C C C C C C C C C C C C C C C C C C C C C C F
+F C C C C C C C C H H H H H H H H C C C P P C C C C C C C L L L L L L L L S C C L L L L L L L C C F
 F C C C C C L C C C C C C C C C C C C C C C C C C C C C C L L L L L L L L L C C L L L L L L L C C F
-F C C C C C L C C H H H H H H H H C C H H H H H H H H H C C C C C C C L L L C C L L L L L L L C C F
+F C C C C C L C C H H H H H H H H C C C C C C C C C C C C C C C C C C L L L C C L L L L L L L C C F
 F C C C C C L C C C C C C C C C C C C C C C C C C C C C C P P P P P C C L L C C L L L L L L L C C F
-F C C C C C L L L C S C C L L F F F F F F F C C C C C P P P P P P P C C C C C C L L L L L L L C C F
-F C C C C C L L L C S C C L F F F F F W W F F C H H H C C P P P P P C C L L C C L L L L L L L C C F
-F C C C C C L L L C S C C L L F F F F F W F C C H H H H H H H H H H H H H H C C L L L L L L L C C F
-F C C C C C L L L C S C C C C C C H H H H H H H H H C C C C C C C C C S C C C C L L L L L L L C C F
-F C C C C C L L L C C C C C C C C H H H H H C C H H H H H H C L L L L L L C C L L L L L L L L C C F
+F C C C C C L L L S C C C L L F F F F F F F C C C C C P P P P P P P C C C C C C L L L L L L L C C F
+F C C C C C L L L C C C C L F F F F F W W F F C H H H C C P P P P P C C L L C C L L L L L L L C C F
+F C C C C C L L L C C C C L L F F F F F W F C C H H H C C C C C C C C C C C C C L L L L L L L C C F
+F C C C C C L L L C C C C C C C C C C C C C C C C C C C C C C C C C C S C C C C L L L L L L L C C F
+F C C C C C L L L C C C C C C C C H H H H H C C C C C C C C C L L L L L L C C L L L L L L L L C C F
 F C C L L L L L L L L L L P P P P P L L L L C C C C C C C C C C L L L L L L C C L L L L L L L C C F
 F C C L L L L L L L L L P P P P P P P C C C C C S C C H H H H C C C C C C C C C C C C C C C W C C F
-F C C L L L L L L L L L L P P P P P C C C C C C C C C C C C C C C C C C C C C C C C C W W W W C C F
+F C C L L L L L L L L L L P P P P P C C C C C C C C C H H H H C C C C C C C C C C C C W W W W C C F
 F C C L L L L L L L L L L L C C L L L C C C C C C C C C C C C C C C C C S C C C C W W W W W W C C F
-F C C L L L L L L L L L L L C C L L L C C C C C C C C C C C C C C C C C C C C W W W W W W W W C C F
-F C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C F
-F C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C F
+F C C L L L L L L L L L L L C C L L L S C C C C C C C C C C S C C P P P C C C W W W W W W W W C C F
+F C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C P P P C C C C C C C C C C C C C F
+F C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C P P P C C C C C C C C C C C C C F
 F C C f f f f f f f f f f f f f f f f f f f f C C f f f f f f f f f f f f f f f f f f f f f f C C F
 F C C f f f f f f f f f f f f f f f f f f f f C C f f f f f f f f f f f f f f f f f f f f f f C C F
 F C C f f f f f f f f f f f f f f f f f f f f C C f f f f f f f f f f f f f f f f f f f f f f C C F
@@ -31,11 +31,11 @@ F C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C 
 F C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C C F
 F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F
 
-male 20
-female 20
+male 25
+female 25
 
-BANKER 0
+BANKER 0.2
 DRIVER 0
-FARMER 1
-SELLER 0
-TEACHER 0
+FARMER 0.4
+SELLER 0.25
+TEACHER 0.15

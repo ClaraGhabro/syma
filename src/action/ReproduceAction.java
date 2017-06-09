@@ -30,7 +30,6 @@ public class ReproduceAction extends Action {
 		baby.getParents().add(human);
 		baby.getParents().add(huwoman);
 		baby.addHouse(human.getHouse());
-		human.getHouse().add(baby);
 		
 		this.human.getChildren().add(baby);
 		this.huwoman.getChildren().add(baby);

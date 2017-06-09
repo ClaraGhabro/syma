@@ -48,9 +48,8 @@ public class ReadMap {
 	public static ArrayList<Place> place = new ArrayList<Place>();
 	
 	public ReadMap() {
-		//this.path = "tests/carte.txt";
-		this.path = "tests/carte_03.txt";
-		//this.path = "tests/carte_01.txt";
+		this.path = "tests/map.txt";
+		//this.path = "tests/map_test.txt";
 	}
 	
 	public Grid<Agent> createGrid(Context<Agent> context) {

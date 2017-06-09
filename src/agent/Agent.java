@@ -42,6 +42,5 @@ public abstract class Agent {
 	protected void die() {
 		Context<Agent> context = ContextUtils.getContext(this);
 		context.remove(this);
-		System.err.println("DIE");
 	}
 }

@@ -37,14 +37,5 @@ public class BuyFoodAction extends Action {
 		
 		this.human.getHouse().addMoney(price * quantity);
 		this.seller.getHouse().addMoney(- (price * quantity));
-
-		if (seller.getJob().getJobType() == JobType.FARMER) {
-			System.err.println("FARMER");
-			System.err.println(quantity);
-		}
-		else {
-			System.err.println("OTHER");
-			System.err.println(quantity);
-		}
 	}
 }

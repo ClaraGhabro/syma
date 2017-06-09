@@ -9,11 +9,13 @@ import repast.simphony.space.grid.Grid;
 public class House extends Place {
 	private double money;
 	private int food;
+	private int nbInhabitants;
 	private ArrayList<Human> inhabitants;
 
 	public House(int i, int j, Grid<Agent> grid, int mood, int energy, int hunger) {
 		super(i, j, grid, PlaceType.HOUSE, mood, energy, hunger);
 		this.inhabitants = new ArrayList<>();
+		this.setNbInhabitants(0);
 		this.money = 50;
 		this.food = 50;
 	}
@@ -33,6 +35,14 @@ public class House extends Place {
 	public void addFood(int food) {
 		this.food += food;
 	}
+	
+	public int getNbInhabitants() {
+		return nbInhabitants;
+	}
+
+	public void setNbInhabitants(int nbInhabitants) {
+		this.nbInhabitants = nbInhabitants;
+	}
 
 	@Override
 	public boolean isAccessibleTo(Human human) {
@@ -40,13 +50,16 @@ public class House extends Place {
 	}
 
 	@Override
-	public void update() {}
+	public void update() {
+		this.nbInhabitants = inhabitants.size();
+	}
 
 	@Override
 	public void step() {}
 
 	public void add(Human human) {
 		inhabitants.add(human);
+		this.setNbInhabitants(this.getNbInhabitants() + 1);
 	}
 	
 	public ArrayList<Human> getInhabitants() {
@@ -65,6 +78,7 @@ public class House extends Place {
 		
 		if (inhabitants.contains(human)) {
 			inhabitants.remove(human);
+			this.setNbInhabitants(this.getNbInhabitants() - 1);
 			double result = money / nbInhab;
 			this.money = (nbInhab - 1) * result;
 			return result;

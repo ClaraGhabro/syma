@@ -165,6 +165,17 @@ public class Human extends Agent{
 	public Job getJob() {
 		return this.job;
 	}
+	public String getJobName() {
+		return this.job.getJobType().toString();
+	}
+	public String getParentsNames() {
+		if (parents.size() == 0)
+			return "No parents";
+		return this.parents.get(0).name + " and " + this.parents.get(1).name;
+	}
+	public int getNbSiblings() {
+		return this.siblings.size();
+	}
 	public House getHouse() {
 		return this.house;
 	}
@@ -176,6 +187,9 @@ public class Human extends Agent{
 	}
 	public int getAge() {
 		return this.age;
+	}
+	public double getMoney() {
+		return this.house.getMoney();
 	}
 	public void resetAction() {
 		this.currentAction = null;
@@ -205,14 +219,18 @@ public class Human extends Agent{
 			return;
 		}
 		if (currentAction == null) {
+			if (house.getInhabitants().size() == 0)
+			{
+				currentAction = new WaitAction(this, 1);
+				return;
+			}
 			int minNeed = Math.min(mood - 20, Math.min(energy - 20, Math.min(hunger - 20, Math.min(house.getFood() - 10, (int) house.getMoney() / house.getInhabitants().size()))));
 			int minNeedReproduce = Math.min(mood, Math.min(energy, hunger));
-			if (age >= 25 && age < 50
+			if (age >= 25 && age < 45
 					&& reproduceCount <= 0 && minNeedReproduce > 30
 					&& house.getPartner(gender) != null
 					&& ReadMap.findEmptyHouses(gender).size() != 0
 					&& gender == 1) {
-				System.err.println("SEX");
 				currentAction = new ReproduceAction(this, house.getPartner(gender));
 			}
 			else if (mood - 20 <= minNeed) {
@@ -254,7 +272,7 @@ public class Human extends Agent{
 	}
 	
 	public Action goGetFood() {
-		if (house.getFood() > Constants.minimumFood || (hunger < Constants.minimumHunger && house.getFood() > 0)) {
+		if ((house.getFood() < Constants.maximumFood && house.getFood() > Constants.minimumFood) || (hunger < Constants.minimumHunger && house.getFood() > 0)) {
 			return new EatAction(this);
 		}
 		if (job.getJobType() == JobType.FARMER)
@@ -277,22 +295,19 @@ public class Human extends Agent{
 	
 	public Action goGetAdulthood() {
 		double budget = house.remove(this);
-		int food = house.getFood() / house.getInhabitants().size();
+		int food = house.getFood() / (house.getInhabitants().size() + 1);
 		house.addFood(-food);
 		for (int i = 0; i < ReadMap.nbHouse; ++i) {
 			House newHouse = ReadMap.findHouse(i);
 			ArrayList<Human> inhabitant = newHouse.getInhabitants();
-			
 			if (newHouse.getInhabitants().isEmpty() 
-					|| inhabitant.size() == 1 && inhabitant.get(0).gender != this.gender) {
-				newHouse.add(this);
-				this.house = newHouse;
+					|| (inhabitant.size() == 1 && inhabitant.get(0).gender != this.gender)) {
+				Human adult = new Human(this);
+				adult.addHouse(newHouse);
+				newHouse.add(adult);
 				newHouse.addMoney(budget);
 				newHouse.addFood(food);
 				Context<Agent> context = ContextUtils.getContext(this);
-				
-				Human adult = new Human(this);
-				adult.addHouse(newHouse);
 				context.add(adult);
 				this.grid.moveTo(adult, this.x, this.y);
 				context.remove(this);

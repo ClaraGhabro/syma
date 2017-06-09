@@ -72,7 +72,7 @@ public class Field extends Place {
 		if (newMature != mature) {
 			Context<Agent> context = ContextUtils.getContext(this);
 			
-			Field f = new Field(this.x, this.y, this.grid, this.getMood(), this.getEnergy(), this.getHunger(), this.age);
+			Field f = new Field(this.x, this.y, this.grid, this.mood, this.energy, this.hunger, this.age);
 			context.add(f);
 			this.grid.moveTo(f,  this.x, this.y);
 			context.remove(this);

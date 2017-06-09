@@ -6,9 +6,9 @@ import repast.simphony.space.grid.Grid;
 
 public class Place extends Agent {
 	private PlaceType type;
-	private int mood;
-	private int energy;
-	private int hunger;
+	public int mood;
+	public int energy;
+	public int hunger;
 
 	public Place(int i, int j, Grid<Agent> grid, PlaceType type, int mood, int energy, int hunger) {
 		super(i, j, grid);
@@ -24,15 +24,6 @@ public class Place extends Agent {
 		human.addHunger(-this.hunger);
 	}
 
-	public int getMood() {
-		return mood;
-	}
-	public int getEnergy() {
-		return energy;
-	}
-	public int getHunger() {
-		return hunger;
-	}
 	public PlaceType getType() {
 		return this.type;
 	}

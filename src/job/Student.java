@@ -2,6 +2,7 @@ package job;
 
 import action.Action;
 import action.GoToPlaceAction;
+import action.LearnAction;
 import action.WaitAction;
 import agent.Human;
 import agent.place.PlaceType;
@@ -18,7 +19,7 @@ public class Student extends Job {
 		if (human.getAge() >= Constants.maxAge)
 			return human.goGetAdulthood();
 		if (ContextCreator.getPlaceAt(human.getX(), human.getY()).getType() == PlaceType.SCHOOL)
-			return new WaitAction(human, Constants.schoolDuration);
+			return new LearnAction(human, Constants.schoolDuration);
 		return new GoToPlaceAction(human, PlaceType.SCHOOL);
 	}
 }

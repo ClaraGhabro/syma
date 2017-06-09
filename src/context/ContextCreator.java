@@ -12,11 +12,6 @@ import repast.simphony.context.Context;
 import repast.simphony.dataLoader.ContextBuilder;
 import repast.simphony.space.grid.Grid;
 
-/* TODO:
- * - generer la carte en fonction du fichier
- * - gerer la reproduction
- * - gerer l'immigration
- */
 public class ContextCreator implements ContextBuilder<Agent> {
 	private static Grid<Agent> grid;
 

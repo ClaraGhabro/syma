@@ -64,7 +64,7 @@ public class House extends Place {
 		if (inhabitants.contains(human)) {
 			inhabitants.remove(human);
 			double result = money / nbInhab;
-			this.money = (nbInhab - 1) * money;
+			this.money = (nbInhab - 1) * result;
 			return result;
 		}
 		else {

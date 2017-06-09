@@ -166,7 +166,7 @@ public class Human extends Agent{
 		}
 		currentAction.update();
 		
-		if (currentAction.getDuration() == 0)
+		if (currentAction.getDuration() <= 0)
 			this.currentAction = null;
 	}
 

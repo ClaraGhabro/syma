@@ -16,16 +16,11 @@ public class BuyFoodAction extends Action {
 	@Override
 	public void initiate() {
 		this.duration = 1;
-		/*
-		this.duration = Math.min(Math.min((int) human.getHouse().getMoney() / (int) seller.getPrice(),
-												seller.getFoodQuantity()),
-												(80 - human.getEnergy()) / Constants.foodHunger);
-		*/
 	}
 
 	@Override
 	public void step() {
-		double price = (seller.getEducation() + 1) / 10;
+		double price = (seller.getEducation()) / 10;
 		
 		if (seller.getJob().getJobType() == JobType.FARMER)
 			price *= Constants.farmerPrice;
@@ -42,5 +37,14 @@ public class BuyFoodAction extends Action {
 		
 		this.human.getHouse().addMoney(price * quantity);
 		this.seller.getHouse().addMoney(- (price * quantity));
+
+		if (seller.getJob().getJobType() == JobType.FARMER) {
+			System.err.println("FARMER");
+			System.err.println(quantity);
+		}
+		else {
+			System.err.println("OTHER");
+			System.err.println(quantity);
+		}
 	}
 }

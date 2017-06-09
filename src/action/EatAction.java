@@ -11,7 +11,7 @@ public class EatAction extends Action {
 
 	@Override
 	public void initiate() {
-		this.duration = (int)Math.min(human.getHouse().getFood(), (Constants.maxFoodHappy - human.getHunger()) / Constants.hungerPerUnit);
+		this.duration = (int) Math.min(human.getHouse().getFood(), (Constants.maxFoodHappy - human.getHunger()) / Constants.hungerPerUnit);
 	}
 
 	@Override

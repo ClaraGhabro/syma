@@ -207,37 +207,30 @@ public class Human extends Agent{
 		if (currentAction == null) {
 			int minNeed = Math.min(mood - 20, Math.min(energy - 20, Math.min(hunger - 20, Math.min(house.getFood() - 10, (int) house.getMoney() / house.getInhabitants().size()))));
 			int minNeedReproduce = Math.min(mood, Math.min(energy, hunger));
-			System.out.println("Reproduce ? " + minNeedReproduce);
 			if (age >= 25 && age < 50
 					&& reproduceCount <= 0 && minNeedReproduce > 30
 					&& house.getPartner(gender) != null
 					&& ReadMap.findEmptyHouses(gender).size() != 0
 					&& gender == 1) {
-				System.out.println("SEX");
+				System.err.println("SEX");
 				currentAction = new ReproduceAction(this, house.getPartner(gender));
 			}
 			else if (mood - 20 <= minNeed) {
-				System.out.println("MOOD");
 				currentAction = goGetMood();
 			}
 			else if (energy - 20 <= minNeed) {
-				System.out.println("SLEEP");
 				currentAction = goGetSleep();
 			}
 			else if (hunger - 20 <= minNeed || house.getFood() - 10 <= minNeed) {
-				System.out.println("FOOD");
 				currentAction = goGetFood();
 			}
 			else if ((int) house.getMoney() / house.getInhabitants().size() <= minNeed) {
-				System.out.println("WORK");
 				currentAction = job.getNextStep(this);
 			}
 			
 			currentAction.initiate();
 		}
 		action = this.name + " " + currentAction;
-		System.out.println(action);
-		System.out.println("name: " + this.name + " age: " + this.age + " education: " + this.education + " energy: " + this.energy + " hunger: " + this.hunger + " food: " + house.getFood() + " mood: " + this.mood);
 		currentAction.step();
 	}
 	
@@ -262,7 +255,6 @@ public class Human extends Agent{
 	
 	public Action goGetFood() {
 		if (house.getFood() > Constants.minimumFood || (hunger < Constants.minimumHunger && house.getFood() > 0)) {
-			System.out.println("EAT");
 			return new EatAction(this);
 		}
 		if (job.getJobType() == JobType.FARMER)

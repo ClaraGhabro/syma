@@ -70,7 +70,7 @@ public class GoToPlaceAction extends Action {
 					}
 				}
 			}
-
+			
 			int min = Integer.MAX_VALUE / 4;
 			int iMin = 0;
 			for (int i = 0; i < successors.size(); i++) {

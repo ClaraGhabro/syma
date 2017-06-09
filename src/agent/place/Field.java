@@ -4,6 +4,7 @@ import agent.Agent;
 import agent.Human;
 import context.Constants;
 import job.Farmer;
+import job.JobType;
 import repast.simphony.context.Context;
 import repast.simphony.engine.environment.RunEnvironment;
 import repast.simphony.random.RandomHelper;
@@ -60,7 +61,7 @@ public class Field extends Place {
 
 	@Override
 	public boolean isAccessibleTo(Human human) {
-		return human.getJob() instanceof Farmer;
+		return human.getJob().getJobType() == JobType.FARMER || human.getJob().getJobType() == JobType.SELLER;
 	}
 
 	@Override

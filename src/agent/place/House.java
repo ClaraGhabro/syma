@@ -14,6 +14,8 @@ public class House extends Place {
 	public House(int i, int j, Grid<Agent> grid, int mood, int energy, int hunger) {
 		super(i, j, grid, PlaceType.HOUSE, mood, energy, hunger);
 		this.inhabitants = new ArrayList<>();
+		this.money = 50;
+		this.food = 50;
 	}
 
 	public double getMoney() {

@@ -101,6 +101,7 @@ public class GoToHumanAction extends Action {
 
 	@Override
 	public void step() {
+		// TODO : check que position contient qqch avant de recup, sinon faire autre chose
 		Point2D position = positions.get(0);
 
 		if (ContextCreator.getPlaceAt(position.x, position.y).isAccessibleTo(human)) {

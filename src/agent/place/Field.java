@@ -4,9 +4,11 @@ import agent.Agent;
 import agent.Human;
 import context.Constants;
 import job.Farmer;
+import repast.simphony.context.Context;
 import repast.simphony.engine.environment.RunEnvironment;
 import repast.simphony.random.RandomHelper;
 import repast.simphony.space.grid.Grid;
+import repast.simphony.util.ContextUtils;
 
 public class Field extends Place {
 	private int maxAge;
@@ -18,6 +20,14 @@ public class Field extends Place {
 		this.age = 0;
 		this.maxAge = RandomHelper.createNormal(30, 5).nextInt();
 		this.minAge = RandomHelper.createNormal(15, 2).nextInt();
+	}
+	
+	public Field(int i, int j, Grid<Agent> grid, int mood, int energy, int hunger, int age) {
+		super(i, j, grid, PlaceType.FIELD, mood, energy, hunger);
+		this.age = 0;
+		this.maxAge = RandomHelper.createNormal(30, 5).nextInt();
+		this.minAge = RandomHelper.createNormal(15, 2).nextInt();
+		this.age = age;
 	}
 
 	public void setMaxAge(int age) {
@@ -54,6 +64,16 @@ public class Field extends Place {
 	public void update() {
 		if (RunEnvironment.getInstance().getCurrentSchedule().getTickCount() % Constants.fieldCount == 0)
 			this.age = (age + 1) % maxAge;
+		if (this.age == this.minAge) {
+			Context<Agent> context = ContextUtils.getContext(this);
+			
+			Field f = new Field(this.x, this.y, this.grid, this.getMood(), this.getEnergy(), this.getHunger(), this.age);
+			context.add(f);
+			this.grid.moveTo(f,  this.x, this.y);
+			context.remove(this);
+			
+		}
+				
 	}
 
 	@Override

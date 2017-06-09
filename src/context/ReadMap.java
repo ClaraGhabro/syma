@@ -84,7 +84,7 @@ public class ReadMap {
             
             while ((sCurrentLine = br.readLine()) != null && i < this.height) {
             	j = 0;
-            	System.out.println(sCurrentLine);
+            //	System.out.println(sCurrentLine);
                 for (String mapElt : sCurrentLine.split(" ")) {
                 	// System.out.println("mapElt: " + mapElt);
                 	

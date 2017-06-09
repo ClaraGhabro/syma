@@ -34,11 +34,11 @@ public class ReadMap {
 	private int width;
 	private int height;
 	
-	private float bankerProb;
-	private float driverProb;
-	private float farmerProb;
-	private float sellerProb;
-	private float teacherProb;
+	private static float bankerProb = 0;
+	private static float driverProb = 0;
+	private static float farmerProb = 0;
+	private static float sellerProb = 0;
+	private static float teacherProb = 0;
 	
 	private int nbMale = 0;
 	private int nbFemale = 0;
@@ -48,10 +48,9 @@ public class ReadMap {
 	public static ArrayList<Place> place = new ArrayList<Place>();
 	
 	public ReadMap() {
-		//this.path = "tests/carte.txt";
+		this.path = "tests/carte.txt";
 		//this.path = "tests/carte_02.txt";
-		this.path = "tests/carte_01.txt";
-
+		//this.path = "tests/carte_01.txt";
 	}
 	
 	public Grid<Agent> createGrid(Context<Agent> context) {
@@ -235,18 +234,18 @@ public class ReadMap {
 		return grid;
     }
 	
-	public Job selectJob() {
-		float sum = this.bankerProb;
+	static public Job selectJob() {
+		float sum = bankerProb;
 		Uniform u = RandomHelper.createUniform();
 		double x = u.nextDouble();
 		
 		if (x <= sum)
 			return new Banker();
-		else if (x <= (sum += this.driverProb))
+		else if (x <= (sum += driverProb))
 			return new Driver();
-		else if (x <= (sum += this.farmerProb))
+		else if (x <= (sum += farmerProb))
 			return new Farmer();
-		else if (x <= (sum += this.sellerProb))
+		else if (x <= (sum += sellerProb))
 			return new Seller();
 		else
 			return new Teacher();

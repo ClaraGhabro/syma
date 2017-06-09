@@ -12,7 +12,7 @@ public class ReproduceAction extends Action {
 
 	public ReproduceAction(Human human, Human huwoman) {
 		super(human);
-		this.type = new String("Is reproducing");
+		this.type = new String("is reproducing");
 		this.huwoman = huwoman;
 	}
 	

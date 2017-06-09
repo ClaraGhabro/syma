@@ -19,7 +19,7 @@ public class GoToHumanAction extends Action {
 		super(human);
 		this.jobType = jobType;
 		this.positions = new ArrayList<>();
-		this.type = new String("Is looking for a " + jobType.toString());
+		this.type = new String("is looking for a " + jobType.toString());
 	}
 
 	@Override

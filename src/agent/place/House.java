@@ -8,6 +8,7 @@ import repast.simphony.space.grid.Grid;
 
 public class House extends Place {
 	private double money;
+	private int food;
 	private ArrayList<Human> inhabitants;
 
 	public House(int i, int j, Grid<Agent> grid, int mood, int energy, int hunger) {
@@ -18,9 +19,17 @@ public class House extends Place {
 	public double getMoney() {
 		return this.money;
 	}
+	
+	public int getFood() {
+		return this.food;
+	}
 
 	public void addMoney(double money) {
 		this.money += money;
+	}
+	
+	public void addFood(int food) {
+		this.food += food;
 	}
 
 	@Override

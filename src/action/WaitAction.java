@@ -7,7 +7,7 @@ public class WaitAction extends Action {
 	public WaitAction(Human human, int duration) {
 		super(human);
 		this.duration = duration;
-		this.type = new String("Is waiting");
+		this.type = new String("is waiting");
 	}
 
 	@Override

@@ -7,7 +7,7 @@ public class TradeAction extends Action {
 
 	public TradeAction(Human human) {
 		super(human);
-		this.type = new String("Is trading");
+		this.type = new String("is trading");
 	}
 
 	@Override

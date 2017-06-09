@@ -6,7 +6,7 @@ import context.Constants;
 public class SleepAction extends Action {
 	public SleepAction(Human human) {
 		super(human);
-		this.type = new String("Is sleeping");
+		this.type = new String("is sleeping");
 	}
 
 	@Override

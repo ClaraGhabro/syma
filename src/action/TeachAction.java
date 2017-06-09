@@ -11,7 +11,7 @@ public class TeachAction extends Action {
 
 	public TeachAction(Human human) {
 		super(human);
-		this.type = new String("Is teaching");
+		this.type = new String("is teaching");
 	}
 
 	@Override

@@ -8,6 +8,7 @@ import context.ContextCreator;
 public class RelaxAction extends Action {
 	public RelaxAction(Human human) {
 		super(human);
+		this.type = new String("is relaxing");
 	}
 
 	@Override

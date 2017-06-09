@@ -4,12 +4,14 @@ import java.util.ArrayList;
 
 import action.Action;
 import action.BuyFoodAction;
+import action.EatAction;
 import action.GoToHumanAction;
 import action.GoToPlaceAction;
 import action.RelaxAction;
 import action.ReproduceAction;
 import action.SleepAction;
 import action.WaitAction;
+import agent.place.Field;
 import agent.place.House;
 import agent.place.Place;
 import agent.place.PlaceType;
@@ -19,9 +21,11 @@ import context.ReadMap;
 import job.Job;
 import job.JobType;
 import job.Student;
+import repast.simphony.context.Context;
 import repast.simphony.engine.environment.RunEnvironment;
 import repast.simphony.random.RandomHelper;
 import repast.simphony.space.grid.Grid;
+import repast.simphony.util.ContextUtils;
 
 public class Human extends Agent{
 	private int gender; // 0 : male, 1 : female
@@ -34,6 +38,7 @@ public class Human extends Agent{
 	private int hunger;
 	private int education;
 	private String name;
+	private String action;
 
 	private ArrayList<Human> parents;
 	private ArrayList<Human> siblings;
@@ -42,6 +47,28 @@ public class Human extends Agent{
 	private Action currentAction;
 	private Job job;
 	private House house;
+	
+	public Human(Human other) {
+		super(other.getX(), other.getY(), other.getGrid());
+		
+		this.gender = other.gender;
+		this.maxAge = other.maxAge;
+		this.age 	= other.age;
+		this.reproduceCount = other.reproduceCount;
+		
+		this.mood 		= other.mood;
+		this.energy 	= other.energy;
+		this.hunger 	= other.hunger;
+		this.education 	= other.education;
+		
+		this.parents 	= other.parents;
+		this.siblings 	= other.siblings;
+		this.children 	= other.children;
+		
+		this.job 			= ReadMap.selectJob();
+		this.name = other.name;
+		this.currentAction = new WaitAction(this, 1);
+	}
 
 	public Human(int i, int j, Grid<Agent> grid, Human father, Human mother) {
 		super(i, j, grid);
@@ -54,7 +81,7 @@ public class Human extends Agent{
 		this.mood 		= Constants.average;
 		this.energy 	= Constants.average;
 		this.hunger 	= Constants.average;
-		this.education 	= 5;
+		this.education 	= 10;
 		
 		this.parents 	= new ArrayList<>();
 		this.siblings 	= new ArrayList<>();
@@ -68,7 +95,6 @@ public class Human extends Agent{
 		this.job 			= new Student();
 		father.house.add(this);
 		this.name = ContextCreator.getRandomName(gender);
-		this.currentAction = new WaitAction(this, 1);
 	}
 	
 	public Human(int i, int j, Grid<Agent> grid, int gender, int age, Job job) {
@@ -81,7 +107,7 @@ public class Human extends Agent{
 		this.mood 		= Constants.average;
 		this.energy 	= Constants.average;
 		this.hunger 	= Constants.average;
-		this.education 	= 5;
+		this.education 	= 10;
 
 
 		this.parents 	= new ArrayList<>();
@@ -147,6 +173,9 @@ public class Human extends Agent{
 	public String getName() {
 		return this.name;
 	}
+	public String getAction() {
+		return this.action;
+	}
 	public int getAge() {
 		return this.age;
 	}
@@ -177,9 +206,8 @@ public class Human extends Agent{
 			house.remove(this);
 			return;
 		}
-
 		if (currentAction == null) {
-			int minNeed = Math.min(mood - 20, Math.min(energy - 20, Math.min(hunger - 20, (int) house.getMoney() / house.getInhabitants().size())));
+			int minNeed = Math.min(mood - 20, Math.min(energy - 20, Math.min(hunger - 20, Math.min(house.getFood() - 10, (int) house.getMoney() / house.getInhabitants().size()))));
 			int minNeedReproduce = Math.min(mood, Math.min(energy, hunger));
 			System.out.println("Reproduce ? " + minNeedReproduce);
 			if (age >= 25 && age < 35
@@ -198,7 +226,7 @@ public class Human extends Agent{
 				System.out.println("SLEEP");
 				currentAction = goGetSleep();
 			}
-			else if (hunger - 20 <= minNeed) {
+			else if (hunger - 20 <= minNeed || house.getFood() - 10 <= minNeed) {
 				System.out.println("FOOD");
 				currentAction = goGetFood();
 			}
@@ -209,8 +237,9 @@ public class Human extends Agent{
 			
 			currentAction.initiate();
 		}
-		System.out.println(currentAction);
-		System.out.println("name: " + this.name + " age: " + this.age + " education: " + this.education + " energy: " + this.energy + " hunger: " + this.hunger + " mood: " + this.mood);
+		action = this.name + " " + currentAction;
+		System.out.println(action);
+		System.out.println("name: " + this.name + " age: " + this.age + " education: " + this.education + " energy: " + this.energy + " hunger: " + this.hunger + " food: " + house.getFood() + " mood: " + this.mood);
 		currentAction.step();
 	}
 	
@@ -233,7 +262,13 @@ public class Human extends Agent{
 		return goPlace;
 	}
 	
-	public Action goGetFood() {		
+	public Action goGetFood() {
+		if (house.getFood() > Constants.minimumFood || (hunger < Constants.minimumHunger && house.getFood() > 0)) {
+			System.out.println("EAT");
+			return new EatAction(this);
+		}
+		if (job.getJobType() == JobType.FARMER)
+			return job.getNextStep(this);
 		ArrayList<Human> humans = ContextCreator.getHumansWithJobAt(this.x, this.y, JobType.SELLER);
 		for (Human someone: humans) {
 			if (someone.x == this.x && someone.y == this.y){
@@ -252,19 +287,28 @@ public class Human extends Agent{
 	
 	public Action goGetAdulthood() {
 		double budget = house.remove(this);
+		int food = house.getFood() / house.getInhabitants().size();
+		house.addFood(-food);
 		for (int i = 0; i < ReadMap.nbHouse; ++i) {
 			House newHouse = ReadMap.findHouse(i);
-			ArrayList<Human> inhabitant = newHouse.getInhabitants(); 
+			ArrayList<Human> inhabitant = newHouse.getInhabitants();
 			
 			if (newHouse.getInhabitants().isEmpty() 
 					|| inhabitant.size() == 1 && inhabitant.get(0).gender != this.gender) {
 				newHouse.add(this);
 				this.house = newHouse;
 				newHouse.addMoney(budget);
+				newHouse.addFood(food);
+				Context<Agent> context = ContextUtils.getContext(this);
+				
+				Human adult = new Human(this);
+				adult.addHouse(newHouse);
+				context.add(adult);
+				this.grid.moveTo(adult, this.x, this.y);
+				context.remove(this);
 				return new WaitAction(this, 1);
 			}
 		}
-		WaitAction wait = new WaitAction(this, 1);
-		return wait;
+		return new WaitAction(this, 1);
 	}
 }

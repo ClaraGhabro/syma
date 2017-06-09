@@ -10,7 +10,7 @@ public class BuyFoodAction extends Action {
 	public BuyFoodAction(Human human, Human seller) {
 		super(human);
 		this.seller = seller;
-		this.type = new String("Is buying food");
+		this.type = new String("is buying food");
 	}
 
 	@Override
@@ -37,8 +37,8 @@ public class BuyFoodAction extends Action {
 		if (quantity <= 0)
 			return;
 		
-		this.human.addHunger(quantity);
-		this.seller.addHunger(-quantity);
+		this.human.getHouse().addFood(quantity);
+		this.seller.getHouse().addFood(-quantity);
 		
 		this.human.getHouse().addMoney(price * quantity);
 		this.seller.getHouse().addMoney(- (price * quantity));

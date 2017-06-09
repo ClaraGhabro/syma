@@ -19,7 +19,7 @@ public class GoToPlaceAction extends Action {
 		super(human);
 		this.placeType = placeType;
 		this.positions = new ArrayList<>();
-		this.type = new String("Is going to a " + placeType.toString());
+		this.type = new String("is going to a " + placeType.toString());
 	}
 
 	@Override

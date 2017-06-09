@@ -7,6 +7,11 @@ public abstract class Action {
 	protected int duration;
 	protected String type;
 	
+	@Override
+	public String toString() {
+		return type;
+	}
+	
 	public Action(Human human) {
 		this.human = human;
 	}

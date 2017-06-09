@@ -9,7 +9,7 @@ public class HarvestAction extends Action {
 	public HarvestAction(Human human, Field field) {
 		super(human);
 		this.field = field;
-		this.type = new String("Is harversting");
+		this.type = new String("is harversting");
 	}
 
 	@Override
@@ -19,7 +19,7 @@ public class HarvestAction extends Action {
 
 	@Override
 	public void step() {
-		human.addHunger(field.getAge());
+		human.getHouse().addFood(field.getAge());
 		field.setAge(Math.min(field.getMinAge() - 3, human.getEducation() / 10));
 	}
 }

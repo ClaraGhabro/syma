@@ -14,12 +14,14 @@ public class Field extends Place {
 	private int maxAge;
 	private int minAge;
 	private int age;
+	private boolean mature;
 
 	public Field(int i, int j, Grid<Agent> grid, int mood, int energy, int hunger) {
 		super(i, j, grid, PlaceType.FIELD, mood, energy, hunger);
 		this.age = 0;
 		this.maxAge = RandomHelper.createNormal(30, 5).nextInt();
 		this.minAge = RandomHelper.createNormal(15, 2).nextInt();
+		this.mature = false;
 	}
 	
 	public Field(int i, int j, Grid<Agent> grid, int mood, int energy, int hunger, int age) {
@@ -28,6 +30,7 @@ public class Field extends Place {
 		this.maxAge = RandomHelper.createNormal(30, 5).nextInt();
 		this.minAge = RandomHelper.createNormal(15, 2).nextInt();
 		this.age = age;
+		this.mature = age >= minAge && age <= maxAge;
 	}
 
 	public void setMaxAge(int age) {
@@ -64,7 +67,8 @@ public class Field extends Place {
 	public void update() {
 		if (RunEnvironment.getInstance().getCurrentSchedule().getTickCount() % Constants.fieldCount == 0)
 			this.age = (age + 1) % maxAge;
-		if (this.age == this.minAge) {
+		boolean newMature = age >= minAge && age <= maxAge;
+		if (newMature != mature) {
 			Context<Agent> context = ContextUtils.getContext(this);
 			
 			Field f = new Field(this.x, this.y, this.grid, this.getMood(), this.getEnergy(), this.getHunger(), this.age);

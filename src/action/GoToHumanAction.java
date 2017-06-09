@@ -91,6 +91,10 @@ public class GoToHumanAction extends Action {
 			Point2D pos = new Point2D(x, y);
 			while (! (pos.x == origin.x) || ! (pos.y == origin.y)) {
 				this.positions.add(pos);
+
+				if (positions.contains(predecessors[pos.x][pos.y]))
+					break;
+				
 				pos = predecessors[pos.x][pos.y];
 			}
 			Collections.reverse(this.positions);

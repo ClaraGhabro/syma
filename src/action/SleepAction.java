@@ -11,7 +11,7 @@ public class SleepAction extends Action {
 
 	@Override
 	public void initiate() {
-		this.duration = (100 - human.getEnergy()) / 10 + 1;		
+		this.duration = (Constants.maxSleepHappy - human.getEnergy()) / Constants.sleepEnergy;		
 	}
 
 	@Override

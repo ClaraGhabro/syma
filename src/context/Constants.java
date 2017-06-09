@@ -19,14 +19,18 @@ public class Constants {
 	public final static int sleepEnergy = 10;
 	public final static int foodHunger = 10;
 	public final static int moodHappy = 10;
+	public final static int maxMoodHappy = 80;
+	public final static int maxSleepHappy = 80;
 	public final static int reproducingEnergy = -10;
 	public final static int reproduceCount = 3;
 	
 	// Counts
-	public final static int yearCount = 52560;
-	public final static int fieldCount = 400;
+	public final static int updateTick = 10;
+	public final static int yearCount = 30;
+	public final static int fieldCount = 3;
 	public final static int gestationCount = 10;
 	
 	// Names
-	public final static List<String> names = Arrays.asList("Lea", "Clara", "Guillaume", "Anatole", "Justin", "Justine", "Xavier", "Josephine");
+	public final static List<String> namesMale = Arrays.asList("Guillaume", "Anatole", "Justin", "Xavier", "Gilbert", "Jonathan", "Paul");
+	public final static List<String> namesFemale = Arrays.asList("Lea", "Clara", "Justine", "Josephine", "Josianne", "Marie", "Claire");
 }

@@ -63,7 +63,7 @@
     <pType>LAST</pType>
     <duration>-1.0</duration>
     <frequency>REPEAT</frequency>
-    <hashCode>-1114437304</hashCode>
+    <hashCode>-1361692741</hashCode>
   </schedParams>
   <layoutClassName>foo.bar.baz</layoutClassName>
   <layoutProjection>grid</layoutProjection>
@@ -71,15 +71,15 @@
   <layerOrder>
     <entry>
       <string>agent.Human</string>
-      <int>3</int>
-    </entry>
-    <entry>
-      <string>agent.place.House</string>
       <int>5</int>
     </entry>
     <entry>
-      <string>agent.place.School</string>
+      <string>agent.place.House</string>
       <int>4</int>
+    </entry>
+    <entry>
+      <string>agent.place.School</string>
+      <int>3</int>
     </entry>
     <entry>
       <string>agent.place.Road</string>

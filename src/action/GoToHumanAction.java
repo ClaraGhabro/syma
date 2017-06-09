@@ -83,7 +83,7 @@ public class GoToHumanAction extends Action {
 			successors.remove(iMin);
 		}
 		
-		if (currentHumans.size() != 0) {
+		if (currentHumans.size() == 0) {
 			this.positions.add(new Point2D(human.getX(), human.getY()));
 		}
 		else {

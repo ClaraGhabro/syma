@@ -54,7 +54,7 @@ public class Human extends Agent{
 		this.mood 		= Constants.average;
 		this.energy 	= Constants.average;
 		this.hunger 	= Constants.average;
-		this.education 	= 0;
+		this.education 	= 5;
 		
 		this.parents 	= new ArrayList<>();
 		this.siblings 	= new ArrayList<>();
@@ -67,7 +67,8 @@ public class Human extends Agent{
 		this.currentAction 	= null;
 		this.job 			= new Student();
 		father.house.add(this);
-		this.name = ContextCreator.getRandomName();
+		this.name = ContextCreator.getRandomName(gender);
+		this.currentAction = new WaitAction(this, 1);
 	}
 	
 	public Human(int i, int j, Grid<Agent> grid, int gender, int age, Job job) {
@@ -80,7 +81,7 @@ public class Human extends Agent{
 		this.mood 		= Constants.average;
 		this.energy 	= Constants.average;
 		this.hunger 	= Constants.average;
-		this.education 	= 10;
+		this.education 	= 5;
 
 
 		this.parents 	= new ArrayList<>();
@@ -90,7 +91,8 @@ public class Human extends Agent{
 		this.currentAction 	= null;
 		this.job 			= job;
 		this.house 			= null;
-		this.name = ContextCreator.getRandomName();
+		this.name = ContextCreator.getRandomName(gender);
+		this.currentAction = new WaitAction(this, 1);
 	}
 
 	public void setReproduceCount(int count) {
@@ -155,7 +157,8 @@ public class Human extends Agent{
 	@Override
 	public void update() {
 		Place currentPlace = ContextCreator.getPlaceAt(x, y);
-		currentPlace.affect(this);
+		if (RunEnvironment.getInstance().getCurrentSchedule().getTickCount() % Constants.updateTick == 0)
+			currentPlace.affect(this);
 
 		if (RunEnvironment.getInstance().getCurrentSchedule().getTickCount() % Constants.yearCount == 0) {
 			age++;
@@ -176,27 +179,30 @@ public class Human extends Agent{
 		}
 
 		if (currentAction == null) {
-			int minNeed = Math.min(mood, Math.min(energy, Math.min(hunger, (int) house.getMoney() / house.getInhabitants().size())));
+			int minNeed = Math.min(mood - 20, Math.min(energy - 20, Math.min(hunger - 20, (int) house.getMoney() / house.getInhabitants().size())));
+			int minNeedReproduce = Math.min(mood, Math.min(energy, hunger));
+			System.out.println("Reproduce ? " + minNeedReproduce);
 			if (age >= 25 && age < 35
-					&& reproduceCount <= 0 && minNeed > 40
+					&& reproduceCount <= 0 && minNeedReproduce > 40
 					&& house.getPartner(gender) != null
-					&& ReadMap.findEmptyHouses(gender).size() != 0) {
+					&& ReadMap.findEmptyHouses(gender).size() != 0
+					&& gender == 1) {
 				System.out.println("SEX");
 				currentAction = new ReproduceAction(this, house.getPartner(gender));
 			}
-			else if (mood == minNeed) {
+			else if (mood - 20 <= minNeed) {
 				System.out.println("MOOD");
 				currentAction = goGetMood();
 			}
-			else if (energy == minNeed) {
+			else if (energy - 20 <= minNeed) {
 				System.out.println("SLEEP");
 				currentAction = goGetSleep();
 			}
-			else if (hunger == minNeed) {
+			else if (hunger - 20 <= minNeed) {
 				System.out.println("FOOD");
 				currentAction = goGetFood();
 			}
-			else if ((int) house.getMoney() / house.getInhabitants().size() == minNeed) {
+			else if ((int) house.getMoney() / house.getInhabitants().size() <= minNeed) {
 				System.out.println("WORK");
 				currentAction = job.getNextStep(this);
 			}
@@ -204,6 +210,7 @@ public class Human extends Agent{
 			currentAction.initiate();
 		}
 		System.out.println(currentAction);
+		System.out.println("name: " + this.name + " age: " + this.age + " education: " + this.education + " energy: " + this.energy + " hunger: " + this.hunger + " mood: " + this.mood);
 		currentAction.step();
 	}
 	
@@ -226,13 +233,7 @@ public class Human extends Agent{
 		return goPlace;
 	}
 	
-	public Action goGetFood() {
-		// if Human is a Seller, don't need to buy, just eat
-		if (this.job.getJobType() == JobType.SELLER) {
-			BuyFoodAction buy = new BuyFoodAction(this, this);
-			return buy;
-		}
-		
+	public Action goGetFood() {		
 		ArrayList<Human> humans = ContextCreator.getHumansWithJobAt(this.x, this.y, JobType.SELLER);
 		for (Human someone: humans) {
 			if (someone.x == this.x && someone.y == this.y){

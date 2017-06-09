@@ -12,7 +12,7 @@ public class RelaxAction extends Action {
 
 	@Override
 	public void initiate() {
-		this.duration = 1;
+		this.duration = (Constants.maxMoodHappy - human.getMood()) / Constants.moodHappy;
 	}
 
 	@Override

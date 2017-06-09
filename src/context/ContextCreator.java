@@ -57,9 +57,13 @@ public class ContextCreator implements ContextBuilder<Agent> {
 		return null;
 	}
 	
-	public static String getRandomName() {
-		List<String> names = Constants.names;
+	public static String getRandomName(int gender) {
+		List<String> names;
 		Random rnd = new Random();
+		if (gender == 1)
+			names = Constants.namesFemale;
+		else
+			names = Constants.namesMale;
 		return names.get(rnd.nextInt(names.size()));
 	}
 

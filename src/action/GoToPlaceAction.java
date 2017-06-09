@@ -88,7 +88,8 @@ public class GoToPlaceAction extends Action {
 		else {
 			Point2D origin = new Point2D(human.getX(), human.getY());
 			Point2D pos = new Point2D(x, y);
-			while (! (pos.x == origin.x) || ! (pos.y == origin.y)) {
+			while (pos.x != origin.x || pos.y != origin.y) {
+				//System.out.println("X: " + pos.x + "Y: " + pos.y);
 				this.positions.add(pos);
 				pos = predecessors[pos.x][pos.y];
 			}
@@ -101,8 +102,10 @@ public class GoToPlaceAction extends Action {
 	@Override
 	public void step() {
 		Point2D position = positions.get(0);
-
+		//System.out.println(position);
+		
 		if (ContextCreator.getPlaceAt(position.x, position.y).isAccessibleTo(human)) {
+			//System.out.println("Accessible");
 			ContextCreator.getGrid().moveTo(human, position.x, position.y);
 
 			positions.remove(0);
@@ -110,6 +113,7 @@ public class GoToPlaceAction extends Action {
 			human.setY(position.y);
 		}
 		else {
+			//System.out.println("Inaccessible");
 			this.duration = 0;
 			this.positions = new ArrayList<>();
 		}

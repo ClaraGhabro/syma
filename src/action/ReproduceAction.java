@@ -22,13 +22,15 @@ public class ReproduceAction extends Action {
 	}
 
 	public void addRandomHuman(int x, int y) {
-		Context<Agent> context = ContextUtils.getContext(this);
+		Context<Agent> context = ContextUtils.getContext(human);
 		Human baby = new Human(x, y, ContextCreator.getGrid(), human, huwoman);
 		context.add(baby);
 		ContextCreator.getGrid().moveTo(baby, x, y);
 		
 		baby.getParents().add(human);
 		baby.getParents().add(huwoman);
+		baby.addHouse(human.getHouse());
+		human.getHouse().add(baby);
 		
 		this.human.getChildren().add(baby);
 		this.huwoman.getChildren().add(baby);
@@ -45,12 +47,8 @@ public class ReproduceAction extends Action {
 		{
 			addRandomHuman(human.getHouse().getX(), human.getHouse().getY());
 			this.human.addEnergy(Constants.reproducingEnergy);
-			this.huwoman.addEnergy(Constants.reproducingEnergy);
 
 			this.human.setReproduceCount(Constants.reproduceCount);
-			this.huwoman.setReproduceCount(Constants.reproduceCount);
-			
-			this.huwoman.resetAction();
 		}
 	}
 }

@@ -101,7 +101,11 @@ public class Tiles extends DefaultStyleOGL2D {
 				}
 				else if (agent instanceof Human && ((Human) agent).getJob().getJobType() == JobType.STUDENT) {
 				// TODO: choisir la bonne direction pour la voiture
-					spatial = shapeFactory.createImage(student_m);
+					Human h = (Human) agent;
+					if (h.getGender() == 1)
+						spatial = shapeFactory.createImage(student_f);
+					else		
+						spatial = shapeFactory.createImage(student_m);
 				}
 				
 				

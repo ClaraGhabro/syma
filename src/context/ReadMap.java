@@ -48,8 +48,8 @@ public class ReadMap {
 	public static ArrayList<Place> place = new ArrayList<Place>();
 	
 	public ReadMap() {
-		this.path = "tests/carte.txt";
-		//this.path = "tests/carte_02.txt";
+		//this.path = "tests/carte.txt";
+		this.path = "tests/carte_02.txt";
 		//this.path = "tests/carte_01.txt";
 
 	}
@@ -162,7 +162,7 @@ public class ReadMap {
 
             for (int r = 0; r < 2; ++r) {
             	sCurrentLine = br.readLine(); 
-  //          	System.out.println("br: " + sCurrentLine);
+            	System.out.println("br: " + sCurrentLine);
             	String[] gender = sCurrentLine.split(" ");
             	switch (gender[0]) {
             		case "male"   : { this.nbMale = Integer.valueOf(gender[1]); break; }

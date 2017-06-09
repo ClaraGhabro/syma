@@ -9,6 +9,7 @@ public class BuyFoodAction extends Action {
 	
 	public BuyFoodAction(Human human, Human seller) {
 		super(human);
+		this.seller = seller;
 		this.type = new String("Is buying food");
 	}
 

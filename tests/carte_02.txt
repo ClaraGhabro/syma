@@ -28,13 +28,14 @@ F R R f f f f f f f f f f f f f f f f f f f f R R f f f f f f f f f f f f f f f 
 F R R f f f f f f f f f f f f f f f f f f f f R R f f f f f f f f f f f f f f f f f f f f f f R R F
 F R R f f f f f f f f f f f f f f f f f f f f R R f f f f f f f f f f f f f f f f f f f f f f R R F
 F R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R F
+F R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R R F
 F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F F
 
 male 10
 female 10
 
-BANKER 0.1
-DRIVER 0.1
+BANKER 0.2
+DRIVER 0.0
 FARMER 0.3
 SELLER 0.2
 STUDENT 0.2
